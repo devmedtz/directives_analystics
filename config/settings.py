@@ -33,12 +33,16 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1',
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +129,12 @@ STATICFILES_DIRS = [
 ]
 
 BASE_URL = config('BASE_URL', default='http://127.0.0.1:8000')
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+LOGOUT_REDIRECT_URL = 'accounts:login'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 if not DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
