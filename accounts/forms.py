@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.forms import AuthenticationForm
+from django.utils.translation import gettext_lazy as _
 from django.db import transaction
 
 from .models import CustomUser
@@ -11,7 +13,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('name', 'email', 'role', )
+        fields = ('email',)
         
 
     def clean_password2(self):
@@ -39,7 +41,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'password', 'name', 'is_active',)
+        fields = ('email', 'password','is_active',)
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -58,4 +60,12 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['name', 'email', ]
+        fields = ['email', ]
+
+class MyAuthForm(AuthenticationForm):
+    error_messages = {
+        'invalid_login': _(
+            "Email or Password is not correct"
+        ),
+        'inactive': _("This account is inactive."),
+    }

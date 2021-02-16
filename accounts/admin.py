@@ -14,23 +14,22 @@ class CustomUserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'name','role','is_active' )
+    list_display = ('email','is_active' )
     list_filter = ('email',)
     readonly_fields = ('email', )
     fieldsets = (
-        (None, {'fields': ('email', 'password','role',)}),
-        ('Personal Info', {'fields': ('name', )}),
+        (None, {'fields': ('email', 'password',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'name', 'password1', 'password2'),
+            'fields': ('email', 'password1', 'password2'),
         }),
     )
-    search_fields = ('email', 'name',)
-    ordering = ('email', 'name', )
+    search_fields = ('email',)
+    ordering = ('email', )
     filter_horizontal = ()
 
     def get_form(self, request, obj=None, **kwargs):
@@ -41,7 +40,6 @@ class CustomUserAdmin(BaseUserAdmin):
         if not is_superuser:
             disabled_fields |= {
                 'email',
-                'role',
             }
 
         # Prevent non-superusers from editing
@@ -51,7 +49,7 @@ class CustomUserAdmin(BaseUserAdmin):
             and obj == request.user
         ):
             disabled_fields |= {
-                'role',
+                'email',
             }
 
 

@@ -36,19 +36,14 @@ class CustomUser(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    name = models.CharField(max_length=100, verbose_name='Full name')
-    ROLE = [
-        ('', 'Please select'),
-        ('admin', 'Admin'),
-    ]
-    role = models.CharField(choices=ROLE, max_length=100, verbose_name='What is your primary role in platform?')
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=True)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'role',]
+    REQUIRED_FIELDS = ['']
 
     def __str__(self):
         return self.email

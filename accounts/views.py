@@ -4,19 +4,20 @@ from django.views.generic import TemplateView, CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from accounts.forms import SignUpForm
+from accounts.forms import SignUpForm, MyAuthForm
 from accounts.models import CustomUser
 
 
 class UserLoginView(LoginView):
     """View for user to login in platform """
     template_name = 'accounts/login.html'
+    authentication_form = MyAuthForm
 
     def get_success_url(self):
         url = self.get_redirect_url()
         if url:
             return url
-        elif self.request.user.role == 'admin':
+        elif self.request.user.is_admin:
             return reverse('admins:dashboard')
         else:
             return f'/admin/'

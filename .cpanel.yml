@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/f21c/sda/
+    - /bin/cp -R sda $DEPLOYPATH
