@@ -3,26 +3,24 @@ from django.db import models
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, name, password=None):
+    def create_user(self, email, password=None):
 
         if not email:
             raise ValueError('You must have an Email Address')
 
         user = self.model(
             email=self.normalize_email(email),
-            name=name,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, role, password=None):
+    def create_superuser(self, email, password=None):
 
         user = self.create_user(
             email,
-            password=password,
-            name=name,
+            password=password
         )
         user.is_active = True
         user.is_superuser = True
