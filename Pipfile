@@ -8,6 +8,9 @@ django = "==3.1.5"
 django-decouple = "*"
 django-crispy-forms = "*"
 django-widget-tweaks = "*"
+pillow = "*"
+django-import-export = "*"
+django-multiselectfield = "*"
 
 [dev-packages]
 

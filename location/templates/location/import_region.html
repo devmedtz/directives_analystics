@@ -1,0 +1,68 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+          <div class="col-md-4">
+              {% include 'messages.html' %}
+              <div class="card card-info">
+                  <div class="card-header">
+                    <h3 class="card-title">Import Regions</h3>
+                  </div>
+                  
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                  <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="card-body">
+                      <div class="form-group">
+                          <label for="exampleInputEmail1">Import regions</label>
+                          <input class="form-control" type="file" name="importRegion">
+                          <small class="text-info">Only .xls file format is allowed</small>
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+    
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Import</button>
+                    </div>
+                  </form>
+                </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">All Region</h3>
+                </div>
+
+                <div>
+                  <table class="table table-sm table-bordered">
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Capital</th>
+                        <th>Population</th>
+                        <th>Area (km2)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for region in region_list %}
+                      <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{region.name}}</td>
+                        <td>{{region.capital}}</td>
+                        <td>{{region.population}}</td>
+                        <td>{{region.area}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

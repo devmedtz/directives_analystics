@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'admins',
     'main',
+    'location',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'widget_tweaks',
+    'multiselectfield',
 ]
 
 MIDDLEWARE = [

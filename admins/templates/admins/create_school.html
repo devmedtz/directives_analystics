@@ -1,0 +1,216 @@
+{% extends 'dashboard/base.html' %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add school Inforrmation{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="padding-top: 40px;">
+    <div class="row">
+        <div class="col-md-12">
+          {% include 'messages.html' %}
+          <div class="card card-info">
+            <div class="card-header">
+              <h3 class="card-title">Add School Information</h3>
+            </div>
+      
+            <form id="SchoolForm" method="POST" action="." enctype="multipart/form-data" data-district-url="{% url 'location:ajax_load_district' %}">{% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+              <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="">{{ form.name.label }}*</label>
+                            {% render_field form.name class="form-control" placeholder=form.name.label %}
+                            {% for error in form.name.errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">{{ form.logo.label }}*</label>
+                            {% render_field form.logo class="form-control" placeholder=form.logo.label %}
+                            {% for error in form.logo.errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">{{ form.gender.label }}*</label>
+                            {% render_field form.gender class="form-control" placeholder=form.gender.label %}
+                            {% for error in form.gender.errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-3">
+                            <label for="">{{ form.accomodation_type.label }}*</label>
+                            {% render_field form.accomodation_type class="form-control" placeholder=form.accomodation_type.label %}
+                            {% for error in form.accomodation_type.errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <label for="">{{ form.class_size.label }}*</label>
+                          {% render_field form.class_size class="form-control" placeholder=form.class_size.label %}
+                          {% for error in form.class_size.errors %}
+                              <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                      <div class="col-md-3">
+                          <label for="">{{ form.school_type.label }}*</label>
+                          {% render_field form.school_type class="form-control" placeholder=form.school_type.label %}
+                          {% for error in form.school_type.errors %}
+                              <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                      <div class="col-md-3">
+                          <label for="">{{ form.school_multicultural.label }}*</label>
+                          {% render_field form.school_multicultural class="form-control" placeholder=form.school_multicultural.label %}
+                          {% for error in form.school_multicultural.errors %}
+                              <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                      <div class="col-md-3">
+                          <label for="">{{ form.school_location.label }}*</label>
+                          {% render_field form.school_location class="form-control" placeholder=form.school_location.label %}
+                          {% for error in form.school_location.errors %}
+                              <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <label for="">{{ form.curricular_system.label }}*</label>
+                          {% render_field form.curricular_system class="form-control" placeholder=form.curricular_system.label %}
+                          {% for error in form.curricular_system.errors %}
+                              <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                      <div class="col-md-3">
+                          <label for="">{{ form.olevel_exam_results_review.label }}</label>
+                          {% render_field form.olevel_exam_results_review class="form-control" placeholder=form.olevel_exam_results_review.label %}
+                          {% for error in form.olevel_exam_results_review.errors %}
+                              <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                      <div class="col-md-3">
+                        <label for="">{{ form.alevel_exam_results_review.label }}</label>
+                          {% render_field form.alevel_exam_results_review class="form-control" placeholder=form.alevel_exam_results_review.label %}
+                          {% for error in form.alevel_exam_results_review.errors %}
+                              <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                      </div>
+
+                      <div class="col-md-3">
+                        
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="">{{ form.school_subjects.label }}*</label><br>
+                      {% for value, text in form.school_subjects.field.choices %}
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" id="id_{{ forloop.counter0 }}" name="{{ form.school_subjects.name }}" type="checkbox" value="{{ value }}"{% if value in checked_school_subjects %} checked="checked"{% endif %}>
+                          <label class="form-check-label">{{ text }}</label>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="">{{ form.subject_combination.label }}*</label><br>
+                      {% for value, text in form.subject_combination.field.choices %}
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" id="id_{{ forloop.counter0 }}" name="{{ form.subject_combination.name }}" type="checkbox" value="{{ value }}"{% if value in checked_subject_combination %} checked="checked"{% endif %}>
+                          <label class="form-check-label">{{ text }}</label>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <label for="">{{ form.minimum_tution_fee.label }}*</label>
+                          {% render_field form.minimum_tution_fee class="form-control" placeholder=form.minimum_tution_fee.label %}
+                          {% for error in form.minimum_tution_fee.errors %}
+                              <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                      <div class="col-md-3">
+                          <label for="">{{ form.maximum_tution_fee.label }}*</label>
+                          {% render_field form.maximum_tution_fee class="form-control" placeholder=form.maximum_tution_fee.label %}
+                          {% for error in form.maximum_tution_fee.errors %}
+                              <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                      <div class="col-md-3">
+                        <label for="">{{ form.region.label }}*</label>
+                        {% render_field form.region class="form-control" placeholder=form.region.label %}
+                        {% for error in form.region.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-3">
+                        <label for="">{{ form.district.label }}*</label>
+                        {% render_field form.district class="form-control" placeholder=form.district.label %}
+                        {% for error in form.district.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                      <div class="col-md-6">
+                        {{form.no_fee|as_crispy_field}}
+                      </div>
+                                           
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-info">
+                  <i class="fa fa-save mr-2"></i>
+                  Submit</button>
+              </div>
+            </form>
+          </div>
+   
+        </div>
+      </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+  $("#id_region").change(function () {
+    var url = $("#SchoolForm").attr("data-district-url");
+    var regionId = $(this).val();
+    $.ajax({                       
+      url: url,
+      data: {
+        'region': regionId
+      },
+      success: function (data) {
+        $("#id_district").html(data); 
+      }
+    });
+
+  });
+</script>
+
+{% endblock javascript %}
