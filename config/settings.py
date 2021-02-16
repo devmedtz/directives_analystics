@@ -127,9 +127,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+MEDIA_URL = '/media/'
+
+if not DEBUG:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+
+    MEDIA_ROOT = '/home/f21c/analytics.f21c.co.tz/media'
+    STATIC_ROOT = '/home/f21c/analytics.f21c.co.tz/static'
+else:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 BASE_URL = config('BASE_URL', default='http://127.0.0.1:8000')
 
