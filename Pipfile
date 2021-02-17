@@ -11,6 +11,7 @@ django-widget-tweaks = "*"
 pillow = "*"
 django-import-export = "*"
 django-multiselectfield = "*"
+django-formtools = "*"
 
 [dev-packages]
 

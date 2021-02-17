@@ -1,5 +1,6 @@
 {% extends 'dashboard/base.html' %}
-{% load widget_tweaks %}
+{% load static %}
+{% load static i18n widget_tweaks %}
 {% load crispy_forms_tags %}
 
 {% block title %}Add school Inforrmation{% endblock %}
@@ -93,16 +94,16 @@
                           {% endfor %}
                       </div>
                       <div class="col-md-3">
-                          <label for="">{{ form.olevel_exam_results_review.label }}</label>
-                          {% render_field form.olevel_exam_results_review class="form-control" placeholder=form.olevel_exam_results_review.label %}
-                          {% for error in form.olevel_exam_results_review.errors %}
-                              <span class="help-block">{{ error }}</span>
-                          {% endfor %}
+                        <label for="">{{ form.minimum_tution_fee.label }}*</label>
+                        {% render_field form.minimum_tution_fee class="form-control" placeholder=form.minimum_tution_fee.label %}
+                        {% for error in form.minimum_tution_fee.errors %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
                       </div>
                       <div class="col-md-3">
-                        <label for="">{{ form.alevel_exam_results_review.label }}</label>
-                          {% render_field form.alevel_exam_results_review class="form-control" placeholder=form.alevel_exam_results_review.label %}
-                          {% for error in form.alevel_exam_results_review.errors %}
+                        <label for="">{{ form.maximum_tution_fee.label }}*</label>
+                          {% render_field form.maximum_tution_fee class="form-control" placeholder=form.maximum_tution_fee.label %}
+                          {% for error in form.maximum_tution_fee.errors %}
                               <span class="help-block">{{ error }}</span>
                           {% endfor %}
                       </div>
@@ -142,20 +143,6 @@
                 <div class="form-group">
                   <div class="row">
                       <div class="col-md-3">
-                          <label for="">{{ form.minimum_tution_fee.label }}*</label>
-                          {% render_field form.minimum_tution_fee class="form-control" placeholder=form.minimum_tution_fee.label %}
-                          {% for error in form.minimum_tution_fee.errors %}
-                              <span class="help-block">{{ error }}</span>
-                          {% endfor %}
-                      </div>
-                      <div class="col-md-3">
-                          <label for="">{{ form.maximum_tution_fee.label }}*</label>
-                          {% render_field form.maximum_tution_fee class="form-control" placeholder=form.maximum_tution_fee.label %}
-                          {% for error in form.maximum_tution_fee.errors %}
-                              <span class="help-block">{{ error }}</span>
-                          {% endfor %}
-                      </div>
-                      <div class="col-md-3">
                         <label for="">{{ form.region.label }}*</label>
                         {% render_field form.region class="form-control" placeholder=form.region.label %}
                         {% for error in form.region.errors %}
@@ -169,6 +156,7 @@
                             <span class="help-block">{{ error }}</span>
                         {% endfor %}
                     </div>
+                    
                   </div>
                 </div>
                 <div class="form-group">
@@ -179,6 +167,63 @@
                                            
                   </div>
                 </div>
+
+                {{ formset.management_form }}
+                <fieldset>
+                  {% for form in formset %}
+                  <div class="row my-2 py-2 border-top myformset sanction-element">
+                    <div class="col">
+                      <div class="row">
+                        {{ form.id  }}
+                        <div class="col">
+                          <div class="form-group">
+                            {{ form.year.label_tag }}
+                            {% render_field form.year class="form-control" %}
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            {{ form.division_one.label_tag }}
+                            {% render_field form.division_one class="form-control" %}
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            {{ form.division_two.label_tag }}
+                            {% render_field form.division_two class="form-control" %}
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            {{ form.division_three.label_tag }}
+                            {% render_field form.division_three class="form-control" %}
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            {{ form.division_four.label_tag }}
+                            {% render_field form.division_four class="form-control" %}
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            {{ form.division_zero.label_tag }}
+                            {% render_field form.division_zero class="form-control" %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {% if form.instance.pk %}
+                      {% render_field form.DELETE class="form-check-input" %}
+                      <label class="form-check-label" for="delete">
+						              {% trans "Delete" %}
+                      </label>
+                    {% endif %}
+                  </div>
+                  {% endfor %}
+                </fieldset>   
+
               </div>
               <div class="card-footer">
                 <button type="submit" class="btn btn-info">
@@ -195,6 +240,18 @@
 {% endblock %}
 
 {% block javascript %}
+
+<script type="text/javascript" src="{% static 'dashboard/js/jquery.formset.js' %}"></script>
+
+<script>
+    $('.myformset').formset({
+        addText: '<i class="fas fa-plus-circle mr-2"></i>{% trans "Add Exam Results" %}',
+		addCssClass: 'btn btn-success',
+		deleteCssClass: 'text-danger m-2',
+        deleteText: '<i class="fas fa-times-circle"></i>',
+		prefix: '{{ formset.prefix }}',
+    });
+</script>
 
 <script>
   $("#id_region").change(function () {

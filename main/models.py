@@ -26,11 +26,10 @@ class School(models.Model):
     #School Academics - O'level
     curricular_system = models.CharField(max_length=100, choices=CURRICULAR_SYSTEM, verbose_name='What is curricular system use?')
     school_subjects = MultiSelectField(max_length=100, choices=SCHOOL_SUBJECTS)
-    olevel_exam_results_review = models.CharField(max_length=100, choices=EXAM_RESULTS_REVIEW, verbose_name="O'level Exams Results Review", blank=True, null=True)
 
     #School Academics - A'level
     subject_combination = MultiSelectField(max_length=100, choices=SUBJECT_COMBINATION)
-    alevel_exam_results_review = models.CharField(max_length=100, choices=EXAM_RESULTS_REVIEW, verbose_name="A'level Exams Results Review", blank=True, null=True)
+   
 
     #school fees
     minimum_tution_fee = models.DecimalField(max_digits=9, decimal_places=0, verbose_name='Minimum Tution Fee per Year')
@@ -52,3 +51,19 @@ class School(models.Model):
             logo.thumbnail(output_size)
             logo.save(self.logo.path)
 
+
+class SchoolExamResult(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+
+    school = models.ForeignKey(School, on_delete=models.SET_NULL,null=True)
+    year = models.PositiveIntegerField()
+    division_one = models.PositiveSmallIntegerField()
+    division_two = models.PositiveSmallIntegerField()
+    division_three = models.PositiveSmallIntegerField()
+    division_four = models.PositiveSmallIntegerField()
+    division_zero = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return str(self.school.name)
