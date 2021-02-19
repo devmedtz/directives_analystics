@@ -66,49 +66,22 @@ def create_edit_school(request, id=None):
 		'schools':schools
 	}
 	
-	template_name = 'admins/create_school.html'
+	if id:
+		template_name = 'admins/edit_school.html'
+	else:
+		template_name = 'admins/create_school.html'
 
 	return render(request, template_name, context)
 
 
+def list_school(request):
 
-# @login_required
-# def create_edit_school(request, id=None):
+	school_qs = School.objects.order_by('-created_at')
 
-# 	user = request.user
-# 	schools = School.objects.all()
+	context = {
+		'school_qs': school_qs,
+	}
 
-# 	if id:
-# 		obj = get_object_or_404(School, id=id)
-# 		if obj.created_by != user:
-# 			return HttpResponseForbidden()
-# 	else:
-# 		obj = School(created_by=user)
+	template_name = 'admins/list_school.html'
 
-# 	if request.POST:
-# 		form = SchoolForm(request.POST, request.FILES, instance=obj)
-		
-# 		if form.is_valid():
-# 			school_obj = form.save(commit=False)
-# 			school_obj.created_by = user
-# 			school_obj.save()
-				
-# 			messages.success(request, 'Success, School was created', extra_tags='alert alert-success')
-
-# 			return redirect(to='admins:create_school')
-
-# 		else:
-# 			messages.error(request, 'Errors occurred', extra_tags='alert alert-danger')
-# 	else:
-# 		form = SchoolForm(instance=obj)
-	
-# 	context = {
-# 		'form': form,
-# 		'schools':schools,
-# 	}
-
-# 	template_name = 'admins/create_school.html'
-
-# 	return render(request, template_name, context=context)
-
-
+	return render(request, template_name, context)

@@ -17,7 +17,7 @@ CLASS_SIZE = (
     ('40+ students in class', '40+ students in class'),
 )
 
-SCHOOL_TYPE = (
+OWNERSHIP = (
     ('', 'select'),
     ('General', 'General'),
     ('Seminary', 'Seminary'),

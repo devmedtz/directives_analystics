@@ -19,7 +19,7 @@ class School(models.Model):
     gender = models.CharField(max_length=100, choices=GENDER)
     accomodation_type = models.CharField(max_length=100, choices=ACCOMODATION, verbose_name='Accomodation Type')
     class_size = models.CharField(max_length=100, choices=CLASS_SIZE, verbose_name="What is class size")
-    school_type = models.CharField(max_length=100, choices=SCHOOL_TYPE, verbose_name='What is School Type')
+    ownership = models.CharField(max_length=100, choices=OWNERSHIP, verbose_name='What is School Type')
     school_multicultural = models.CharField(max_length=100, choices=MULTICULTURAL, verbose_name='Is school has multicultural')
     school_location = models.CharField(max_length=100, choices=SCHOOL_LOCATION, verbose_name='Where school located?')
 

@@ -1,0 +1,364 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}{% endblock title %}
+
+{% block stylesheet %}
+
+
+{% endblock stylesheet %}
+
+{% block content %}
+    <div class="py-3 text-center">
+        <img class="d-block mx-auto mb-3" src="{% static 'main/images/logo.jpg' %}" alt="" width="100" height="100">
+        <h3 class="text-primary">Schools Directive Analytics </h3>
+        <p class="lead">Below is an example form built entirely with Bootstrap’s form controls.</p>
+    </div>
+
+    <form method="GET" action="">
+        <div class="text-center border-bottom border-primary mb-2">
+            <h4>Basic information</h4>
+        </div>
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">1. Want a school with gender status of</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <label class="form-check-label" for="inlineRadio1">Boys</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                <label class="form-check-label" for="inlineRadio2">Girls</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                <label class="form-check-label" for="inlineRadio3">Co-ed/boys and Girls</label>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">2. Want a school which is </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio11" value="option1">
+                <label class="form-check-label" for="inlineRadio11">Boarding/Hostel</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio22" value="option2">
+                <label class="form-check-label" for="inlineRadio22">Day</label>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">3. Want a school with </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
+                <label class="form-check-label" for="inlineRadio33">40 students in class</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">40 + students in class</label>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">4. Want a private school </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
+                <label class="form-check-label" for="inlineRadio33">General private</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Christian seminary</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Islamic Seminary</label>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">5. Want a school with Multicultural/International students? </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
+                <label class="form-check-label" for="inlineRadio33">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Not necessary</label>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">6. Want a school in </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
+                <label class="form-check-label" for="inlineRadio33">Big cities</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Mid towns</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Village areas</label>
+            </div>
+        </div>
+
+        <div class="my-5 text-center border-bottom border-primary mb-2">
+            <h4>School Academics</h4>
+            <h5 class="lead">O'Level</h5>
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">7. Want a shool with a curricular system of </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
+                <label class="form-check-label" for="inlineRadio33">NECTA</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">International curricular</label>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">8. Want a school with </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
+                <label class="form-check-label" for="inlineRadio33">Business-based subjects</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Science-based subjects</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Nutrition</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Agriculture</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Computer science</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Fine Art</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Pysical/Sports education</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Music</label>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">9. Review national exams results of a school for </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
+                <label class="form-check-label" for="inlineRadio33">1 Year</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">3 Year</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">5 Year</label>
+            </div>
+        </div>
+
+        <div class="my-5 text-center border-bottom border-primary mb-2">
+            <h4>School Academics</h4>
+            <h5 class="lead">A'Level</h5>
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">10. Want a school with </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
+                <label class="form-check-label" for="inlineRadio33">CBA</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">CBN</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">CBG</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">ECA</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">EGM</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">HGE</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">HGK</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">HGL</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">HKL</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">KLA</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">KLF</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">PCB</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">PCM</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">PGM</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">ARB</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Comp. Sc.</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Divinity</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">Islamic</label>
+            </div>
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">11. Review national exams results of a school for </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
+                <label class="form-check-label" for="inlineRadio33">1 Year</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">3 Year</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
+                <label class="form-check-label" for="inlineRadio44">5 Year</label>
+            </div>
+        </div>
+
+        <div class="my-5 text-center border-bottom border-primary mb-3">
+            <h4>School Fees Ranges</h4>
+        </div>
+
+
+        <div class="row mb-4">
+            <label for="inputEmail3" class="col-sm-6 col-form-label">12. Want school with Tution fee of Range, Please place the range </label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">Tshs.</span>
+                    <input type="text" class="form-control" placeholder="Minimum Amount">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">Tshs.</span>
+                    <input type="text" class="form-control" placeholder="Maximum Amount">
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="mb-2">
+            <label for="inputEmail3" class="col-form-label me-3">13. Want a school with scholarship or supported by charity organization (no free) </label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
+                <label class="form-check-label" for="inlineRadio33"></label>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <label for="inputEmail3" class="col-sm-5 col-form-label">14. Choose a region/location of your interest here </label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Select Region</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Select District</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="row mb-4">
+            <label for="inputEmail3" class="col-sm-7 col-form-label">15. Choose a school which you want more information about it </label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Select School</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <label for="inputEmail3" class="col-sm-8 col-form-label">16. Write your whatsapp Number to receive more school information in video clips and pictures </label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">+255</span>
+                    <input type="text" name="", class="form-control" placeholder="phone number ..">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+            </div>
+            
+        </div>
+    </form>
+ 
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock javascript %}

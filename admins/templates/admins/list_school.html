@@ -1,0 +1,85 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}School List{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid" style="padding-top: 40px;">
+      <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">List of Schools</h3>
+                    </div>
+                    <div class="card-body">
+                      <table id="example1" class="table table-sm table-bordered">
+                        <thead>
+                        <tr class="bg-info text-light">
+                            <th>No.</th>
+                            <th>School Name</th>
+                            <th>Ownership</th>
+                            <th>Gender</th>
+                            <th>Mode</th>
+                            <th>Region</th>
+                            <th>District</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for school in school_qs %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>
+                                    <a href="#">{{school.name}}</a>
+                                </td>
+                                <td>{{school.ownership}}</td>
+                                <td>{{school.gender}}</td>
+                                <td>{{school.accomodation_type}}</td>
+                                <td>{{school.region}}</td>
+                                <td>{{school.district}}</td>
+                                <td>
+                                    <a class="text-success mr-2" href="#">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a class="text-info mr-2" href="{% url 'admins:edit_school' school.id %}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a class="text-danger" href="#">
+                                        <i class="fa fa-times-circle"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+	$(function () {
+	  $("#example1").DataTable({
+		"responsive": true, "lengthChange": false, "autoWidth": false,
+		"buttons": ["csv", "excel", "pdf", "print", "colvis"]
+	  }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+	  $('#example2').DataTable({
+		"paging": true,
+		"lengthChange": false,
+		"searching": false,
+		"ordering": true,
+		"info": true,
+		"autoWidth": false,
+		"responsive": true,
+	  });
+	});
+  </script>
+
+
+{% endblock javascript %}

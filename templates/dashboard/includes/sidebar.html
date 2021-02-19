@@ -12,12 +12,14 @@
 			<nav class="mt-2">
 				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 					<li class="nav-item">
+						<li class="nav-item">
+							<a href="{% url 'admins:list_school' %}" class="nav-link">
+							<i class="nav-icon fas fa-chart-pie"></i>
+							<p>All School</p></a>
+						</li>
 						<a href="{% url 'admins:create_school' %}" class="nav-link">
 						<i class="nav-icon fas fa-chart-pie"></i>
-						<p>
-							Add School Info
-						</p>
-						</a>
+						<p>Add School Info</p></a>
 					</li>
 				</ul>
 			</nav>
