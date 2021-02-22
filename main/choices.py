@@ -10,7 +10,7 @@ ACCOMODATION = (
     ('Boarding/Hostel', 'Boarding/Hostel'),
     ('Day', 'Day'),
 )
-
+ 
 CLASS_SIZE = (
     ('', 'select'),
     ('40 students in class', '40 students in class'),
@@ -20,7 +20,6 @@ CLASS_SIZE = (
 OWNERSHIP = (
     ('', 'select'),
     ('General', 'General'),
-    ('Seminary', 'Seminary'),
     ('Christian Seminary', 'Christian Seminary'),
     ('Islamic Seminary', 'Islamic Seminary'),
 )

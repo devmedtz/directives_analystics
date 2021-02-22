@@ -13,94 +13,93 @@
     <div class="py-3 text-center">
         <img class="d-block mx-auto mb-3" src="{% static 'main/images/logo.jpg' %}" alt="" width="100" height="100">
         <h3 class="text-primary">Schools Directive Analytics </h3>
-        <p class="lead">Below is an example form built entirely with Bootstrap’s form controls.</p>
-    </div>
+    </div> 
 
-    <form method="GET" action="">
+    <form method="GET" action=".">
         <div class="text-center border-bottom border-primary mb-2">
             <h4>Basic information</h4>
         </div>
         <div class="mb-2">
             <label for="inputEmail3" class="col-form-label me-3">1. Want a school with gender status of</label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <label class="form-check-label" for="inlineRadio1">Boys</label>
+                <input class="form-check-input" type="radio" name="gender" id="id_gender_1" value="Boys" {% if values.gender == "Boys" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_gender_1">Boys</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                <label class="form-check-label" for="inlineRadio2">Girls</label>
+                <input class="form-check-input" type="radio" name="gender" id="id_gender_2" value="Girls" {% if values.gender == "Girls" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_gender_2">Girls</label> 
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                <label class="form-check-label" for="inlineRadio3">Co-ed/boys and Girls</label>
+                <input class="form-check-input" type="radio" name="gender" id="id_gender_3" value="co-ed/boys and girls" {% if values.gender == "co-ed/boys and girls" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_gender_3">Co-ed/boys and Girls</label>
             </div>
         </div>
 
         <div class="mb-2">
             <label for="inputEmail3" class="col-form-label me-3">2. Want a school which is </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio11" value="option1">
-                <label class="form-check-label" for="inlineRadio11">Boarding/Hostel</label>
+                <input class="form-check-input" type="radio" name="accomodation" id="id_accomodation_1" value="Boarding/Hostel" {% if values.accomodation == "Boarding/Hostel" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_accomodation_1">Boarding/Hostel</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio22" value="option2">
-                <label class="form-check-label" for="inlineRadio22">Day</label>
+                <input class="form-check-input" type="radio" name="accomodation" id="id_accomodation_2" value="Day" {% if values.accomodation == "Day" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_accomodation_2">Day</label>
             </div>
         </div>
 
         <div class="mb-2">
             <label for="inputEmail3" class="col-form-label me-3">3. Want a school with </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
-                <label class="form-check-label" for="inlineRadio33">40 students in class</label>
+                <input class="form-check-input" type="radio" name="class_size" id="id_class_size_1" value="40 students in class" {% if values.class_size == "40 students in class" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_class_size_1">40 students in class</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">40 + students in class</label>
+                <input class="form-check-input" type="radio" name="class_size" id="id_class_size_2" value="40+ students in class" {% if values.class_size == "40+ students in class" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_class_size_2">40 + students in class</label>
             </div>
         </div>
 
         <div class="mb-2">
             <label for="inputEmail3" class="col-form-label me-3">4. Want a private school </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
-                <label class="form-check-label" for="inlineRadio33">General private</label>
+                <input class="form-check-input" type="radio" name="ownership" id="id_ownership_1" value="General" {% if values.ownership == "General" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_ownership_1">General private</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Christian seminary</label>
+                <input class="form-check-input" type="radio" name="ownership" id="id_ownership_2" value="Christian Seminary" {% if values.ownership == "Christian Seminary" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_ownership_2">Christian seminary</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Islamic Seminary</label>
+                <input class="form-check-input" type="radio" name="ownership" id="id_ownership_3" value="Islamic Seminary" {% if values.ownership == "Islamic Seminary" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_ownership_3">Islamic Seminary</label>
             </div>
         </div>
 
         <div class="mb-2">
             <label for="inputEmail3" class="col-form-label me-3">5. Want a school with Multicultural/International students? </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
-                <label class="form-check-label" for="inlineRadio33">Yes</label>
+                <input class="form-check-input" type="radio" name="multicultural" id="id_multicultural_1" value="Yes" {% if values.multicultural == "Yes" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_multicultural_1">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Not necessary</label>
+                <input class="form-check-input" type="radio" name="multicultural" id="id_multicultural_2" value="Not necessary" {% if values.multicultural == "Not necessary" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_multicultural_2">Not necessary</label>
             </div>
         </div>
 
         <div class="mb-2">
             <label for="inputEmail3" class="col-form-label me-3">6. Want a school in </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
-                <label class="form-check-label" for="inlineRadio33">Big cities</label>
+                <input class="form-check-input" type="radio" name="school_location" id="id_school_location_1" value="Big cities" {% if values.school_location == "Big cities" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_school_location_1">Big cities</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Mid towns</label>
+                <input class="form-check-input" type="radio" name="school_location" id="id_school_location_2" value="Mid towns" {% if values.school_location == "Mid towns" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_school_location_2">Mid towns</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Village areas</label>
+                <input class="form-check-input" type="radio" name="school_location" id="id_school_location_3" value="villages areas" {% if values.school_location == "villages areas" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_school_location_3">Village areas</label>
             </div>
         </div>
 
@@ -112,48 +111,89 @@
         <div class="mb-2">
             <label for="inputEmail3" class="col-form-label me-3">7. Want a shool with a curricular system of </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
-                <label class="form-check-label" for="inlineRadio33">NECTA</label>
+                <input class="form-check-input" type="radio" name="curricular_system" id="id_curricular_system_1" value="NECTA" {% if values.curricular_system == "NECTA" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_curricular_system_1">NECTA</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">International curricular</label>
+                <input class="form-check-input" type="radio" name="curricular_system" id="id_curricular_system_2" value="International curriculars" {% if values.curricular_system == "International curriculars" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_curricular_system_2">International curricular</label>
             </div>
         </div>
 
         <div class="mb-2">
             <label for="inputEmail3" class="col-form-label me-3">8. Want a school with </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
-                <label class="form-check-label" for="inlineRadio33">Business-based subjects</label>
+                <input class="form-check-input" type="checkbox" name="school_subjects" id="id_school_subjects_1" value="Business-based-subjects"
+                    {% for c in subject_checked %}
+                        {% if c == 'Business-based-subjects' %}
+                            checked="checked"
+                        {% endif %}
+                    {% endfor %}>
+                    
+                <label class="form-check-label" for="id_school_subjects_1">Business-based subjects</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Science-based subjects</label>
+                <input class="form-check-input" type="checkbox" name="school_subjects" id="id_school_subjects_2" value="Science-based subjects"
+                {% for c in subject_checked %}
+                        {% if c == 'Science-based subjects' %}
+                            checked="checked"
+                        {% endif %}
+                    {% endfor %}>
+                <label class="form-check-label" for="id_school_subjects_2">Science-based subjects</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Nutrition</label>
+                <input class="form-check-input" type="checkbox" name="school_subjects" id="id_school_subjects_3" value="Nutrition"
+                {% for c in subject_checked %}
+                        {% if c == 'Nutrition' %}
+                            checked="checked"
+                        {% endif %}
+                    {% endfor %}>
+                <label class="form-check-label" for="id_school_subjects_3">Nutrition</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Agriculture</label>
+                <input class="form-check-input" type="checkbox" name="school_subjects" id="id_school_subjects_4" value="Agriculture" 
+                {% for c in subject_checked %}
+                        {% if c == 'Agriculture' %}
+                            checked="checked"
+                        {% endif %}
+                    {% endfor %}>
+                <label class="form-check-label" for="id_school_subjects_4">Agriculture</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Computer science</label>
+                <input class="form-check-input" type="checkbox" name="school_subjects" id="id_school_subjects_5" value="Computer science"
+                {% for c in subject_checked %}
+                        {% if c == 'Computer science' %}
+                            checked="checked"
+                        {% endif %}
+                    {% endfor %}>
+                <label class="form-check-label" for="id_school_subjects_5">Computer science</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Fine Art</label>
+                <input class="form-check-input" type="checkbox" name="school_subjects" id="id_school_subjects_6" value="Fine Art"
+                {% for c in subject_checked %}
+                        {% if c == 'Fine Art' %}
+                            checked="checked"
+                        {% endif %}
+                    {% endfor %}>
+                <label class="form-check-label" for="id_school_subjects_6">Fine Art</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Pysical/Sports education</label>
+                <input class="form-check-input" type="checkbox" name="school_subjects" id="id_school_subjects_7" value="Physical/Sports education"
+                {% for c in subject_checked %}
+                        {% if c == 'Physical/Sports education' %}
+                            checked="checked"
+                        {% endif %}
+                    {% endfor %}>
+                <label class="form-check-label" for="id_school_subjects_7">Pysical/Sports education</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Music</label>
+                <input class="form-check-input" type="checkbox" name="school_subjects" id="id_school_subjects_8" value="Music"
+                {% for c in subject_checked %}
+                        {% if c == 'Music' %}
+                            checked="checked"
+                        {% endif %}
+                    {% endfor %}>
+                <label class="form-check-label" for="id_school_subjects_8">Music</label>
             </div>
         </div>
 
