@@ -39,14 +39,52 @@ def homepage(request):
 	if 'school_subjects' in request.GET:
 		school_subjects = request.GET.getlist('school_subjects')
 		if school_subjects:
-			school_qs = school_qs.filter(school_subjects__in=school_subjects)
+			pass
+			#school_qs = school_qs.filter(school_subjects__in=school_subjects)
+
+	if 'exam_4_review' in request.GET:
+		exam_4_review = request.GET['exam_4_review']
+		if exam_4_review:
+			pass
+			#school_qs = school_qs.filter(curricular_system=curricular_system)
+
+	if 'exam_6_review' in request.GET:
+		exam_6_review = request.GET['exam_6_review']
+		if exam_6_review:
+			pass
+			#school_qs = school_qs.filter(curricular_system=curricular_system)
+
+	if 'combination' in request.GET:
+		combination = request.GET.getlist('combination')
+		if combination:
+			pass
+			#school_qs = school_qs.filter(subject_combination__in=combination)
+
+	if 'fee_from' and 'fee_to' in request.GET:
+		fee_from = request.GET.get('fee_from', 0)
+		fee_to = request.GET.get('fee_to', 50000000)
+		if fee_from and fee_to:
+			school_qs = school_qs.filter(average_tution_fee__gte=fee_from).filter(average_tution_fee__lte=fee_to)
+
+
+	if 'charity_support' in request.GET:
+			charity_support = request.GET.get('charity_support', 0)
+			print(charity_support)
+			if charity_support:
+				school_qs = school_qs.filter(no_fee=charity_support)
+		
+
 
 	print('school_qs:', school_qs)
+	 
+	school_subjects = request.GET.getlist('school_subjects')
+	combination = request.GET.getlist('combination')
 
 	context = {
 		'school_qs':school_qs,
 		'values': request.GET,
 		'subject_checked':school_subjects,
+		'combinations':combination,
 	}
 
 	template_name = 'main/index.html'

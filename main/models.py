@@ -22,7 +22,7 @@ class School(models.Model):
     ownership = models.CharField(max_length=100, choices=OWNERSHIP, verbose_name='What is School Type')
     school_multicultural = models.CharField(max_length=100, choices=MULTICULTURAL, verbose_name='Is school has multicultural')
     school_location = models.CharField(max_length=100, choices=SCHOOL_LOCATION, verbose_name='Where school located?')
-
+ 
     #School Academics - O'level
     curricular_system = models.CharField(max_length=100, choices=CURRICULAR_SYSTEM, verbose_name='What is curricular system use?')
     school_subjects = MultiSelectField(max_length=100, choices=SCHOOL_SUBJECTS)
@@ -32,8 +32,7 @@ class School(models.Model):
    
 
     #school fees
-    minimum_tution_fee = models.DecimalField(max_digits=9, decimal_places=0, verbose_name='Minimum Tution Fee per Year')
-    maximum_tution_fee = models.DecimalField(max_digits=9, decimal_places=0, verbose_name='Maximum Tution Fee per Year')
+    average_tution_fee = models.DecimalField(max_digits=9, decimal_places=0, verbose_name='Average Tution Fee per Year')
     no_fee = models.BooleanField(default=False, verbose_name='School has scholarship or supported by charity (no-fee)?')
 
     #school location

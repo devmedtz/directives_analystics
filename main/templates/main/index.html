@@ -197,19 +197,19 @@
             </div>
         </div>
 
-        <div class="mb-2">
-            <label for="inputEmail3" class="col-form-label me-3">9. Review national exams results of a school for </label>
+        <div class="mb-2"> 
+            <label for="inputEmail3" class="col-form-label me-3">9. Review national Form 4 exams results of a school for </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
-                <label class="form-check-label" for="inlineRadio33">1 Year</label>
+                <input class="form-check-input" type="radio" name="exam_4_review" id="id_exam_4_review_1" value="1" {% if values.exam_4_review == "1" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_exam_4_review_1">1 Year</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">3 Year</label>
+                <input class="form-check-input" type="radio" name="exam_4_review" id="id_exam_4_review_2" value="3" {% if values.exam_4_review == "3" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_exam_4_review_2">3 Year</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">5 Year</label>
+                <input class="form-check-input" type="radio" name="exam_4_review" id="id_exam_4_review_3" value="5" {% if values.exam_4_review == "5" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_exam_4_review_3">5 Year</label>
             </div>
         </div>
 
@@ -221,92 +221,93 @@
         <div class="mb-2">
             <label for="inputEmail3" class="col-form-label me-3">10. Want a school with </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
-                <label class="form-check-label" for="inlineRadio33">CBA</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_1" value="CBA"
+                {% if 'CBA' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_1">CBA</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">CBN</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_2" value="CBN" {% if 'CBN' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_2">CBN</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">CBG</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_3" value="CBG" {% if 'CBG' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_3">CBG</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">ECA</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_4" value="ECA" {% if 'ECA' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_4">ECA</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">EGM</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_5" value="EGM" {% if 'EGM' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_5">EGM</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">HGE</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_6" value="HGE" {% if 'HGE' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_6">HGE</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">HGK</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_7" value="HGK" {% if 'HGK' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_7">HGK</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">HGL</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_8" value="HGL" {% if 'HGL' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_8">HGL</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">HKL</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_9" value="HKL" {% if 'HKL' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_9">HKL</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">KLA</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_10" value="KLA" {% if 'KLA' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_10">KLA</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">KLF</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_11" value="KLF" {% if 'KLF' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_11">KLF</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">PCB</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_12" value="PCB" {% if 'PCB' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_12">PCB</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">PCM</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_13" value="PCM" {% if 'PCM' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_13">PCM</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">PGM</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_14" value="PGM" {% if 'PGM' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_14">PGM</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">ARB</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_15" value="ARB" {% if 'ARB' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_15">ARB</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Comp. Sc.</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_16" value="Computer science" {% if 'Computer science' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_16">Computer science</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Divinity</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_17" value="Divinity" {% if 'Divinity' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_17">Divinity</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">Islamic</label>
+                <input class="form-check-input" type="checkbox" name="combination" id="id_combination_18" value="Islamic" {% if 'Islamic' in combinations %} checked = "checked"{% endif %}>
+                <label class="form-check-label" for="id_combination_18">Islamic</label>
             </div>
         </div>
 
         <div class="mb-2">
-            <label for="inputEmail3" class="col-form-label me-3">11. Review national exams results of a school for </label>
+            <label for="inputEmail3" class="col-form-label me-3">11. Review national Form 6 exams results of a school for </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
-                <label class="form-check-label" for="inlineRadio33">1 Year</label>
+                <input class="form-check-input" type="radio" name="exam_6_review" id="exam_6_review_1" value="1" {% if values.exam_6_review == "1" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="exam_6_review_1">1 Year</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">3 Year</label>
+                <input class="form-check-input" type="radio" name="exam_6_review" id="exam_6_review_2" value="3" {% if values.exam_6_review == "3" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="exam_6_review_2">3 Year</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio44" value="option2">
-                <label class="form-check-label" for="inlineRadio44">5 Year</label>
+                <input class="form-check-input" type="radio" name="exam_6_review" id="exam_6_review_3" value="5" {% if values.exam_6_review == "5" %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="exam_6_review_3">5 Year</label>
             </div>
         </div>
 
@@ -320,13 +321,13 @@
             <div class="col-sm-3">
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">Tshs.</span>
-                    <input type="text" class="form-control" placeholder="Minimum Amount">
+                    <input name="fee_from" type="number" class="form-control" placeholder="From" value="{{values.fee_from}}" >
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">Tshs.</span>
-                    <input type="text" class="form-control" placeholder="Maximum Amount">
+                    <input name="fee_to" type="number" class="form-control" placeholder="To" value="{{values.fee_to}}">
                 </div>
             </div>
             
@@ -335,8 +336,8 @@
         <div class="mb-2">
             <label for="inputEmail3" class="col-form-label me-3">13. Want a school with scholarship or supported by charity organization (no free) </label>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineRadioOptions2" id="inlineRadio33" value="option1">
-                <label class="form-check-label" for="inlineRadio33"></label>
+                <input class="form-check-input" type="checkbox" name="charity_support" id="id_charity_support_1" value="1" {% if values.charity_support == '1' %}checked="checked"{% endif %}>
+                <label class="form-check-label" for="id_charity_support_1"></label>
             </div>
         </div>
 
@@ -384,7 +385,7 @@
             <div class="col-sm-3">
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">+255</span>
-                    <input type="text" name="", class="form-control" placeholder="phone number ..">
+                    <input type="number" name="", class="form-control" placeholder="phone number ..">
                 </div>
             </div>
         </div>
