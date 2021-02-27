@@ -8,6 +8,18 @@ from location.models import Region, District
 
 User = get_user_model()
 
+class SubjectCombination(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class SchoolSubject(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
 class School(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -25,10 +37,10 @@ class School(models.Model):
  
     #School Academics - O'level
     curricular_system = models.CharField(max_length=100, choices=CURRICULAR_SYSTEM, verbose_name='What is curricular system use?')
-    school_subjects = MultiSelectField(max_length=100, choices=SCHOOL_SUBJECTS)
+    school_subjects = models.ManyToManyField(SchoolSubject)
 
     #School Academics - A'level
-    subject_combination = MultiSelectField(max_length=100, choices=SUBJECT_COMBINATION)
+    subject_combination = models.ManyToManyField(SubjectCombination)
    
 
     #school fees
@@ -51,18 +63,46 @@ class School(models.Model):
             logo.save(self.logo.path)
 
 
-class SchoolExamResult(models.Model):
+class ExamResult(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 
     school = models.ForeignKey(School, on_delete=models.SET_NULL,null=True)
+
     year = models.PositiveIntegerField()
-    division_one = models.PositiveSmallIntegerField()
-    division_two = models.PositiveSmallIntegerField()
-    division_three = models.PositiveSmallIntegerField()
-    division_four = models.PositiveSmallIntegerField()
-    division_zero = models.PositiveSmallIntegerField()
+    classe = models.PositiveSmallIntegerField(verbose_name='Form:')
+    division_one = models.PositiveIntegerField()
+    division_two = models.PositiveIntegerField()
+    division_three = models.PositiveIntegerField()
+    division_four = models.PositiveIntegerField()
+    division_zero = models.PositiveIntegerField()
 
     def __str__(self):
         return str(self.school.name)
+
+
+class ExamRank(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    school = models.ForeignKey(School, on_delete=models.SET_NULL,null=True)
+
+    dv1T = models.PositiveIntegerField(blank=True, null=True)
+    dv2T = models.PositiveIntegerField(blank=True, null=True)
+    dv3T = models.PositiveIntegerField(blank=True, null=True)
+    dv4T = models.PositiveIntegerField(blank=True, null=True)
+    dv0T = models.PositiveIntegerField(blank=True, null=True)
+
+    dv1P = models.DecimalField(max_digits=10, decimal_places=2,blank=True, null=True)
+    dv2P = models.DecimalField(max_digits=10, decimal_places=2,blank=True, null=True)
+    dv3P = models.DecimalField(max_digits=10, decimal_places=2,blank=True, null=True)
+    dv4P = models.DecimalField(max_digits=10, decimal_places=2,blank=True, null=True)
+    dv0P = models.DecimalField(max_digits=10, decimal_places=2,blank=True, null=True)
+
+    total_point = models.DecimalField(max_digits=10, decimal_places=2,blank=True, null=True)
+
+
+    def __str__(self):
+        return self.school.name
+

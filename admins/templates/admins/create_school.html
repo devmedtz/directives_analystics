@@ -14,12 +14,14 @@
             <div class="card-header">
               <h3 class="card-title">Add School Information</h3>
             </div>
-      
+
+          <div class="card-body">
+
             <form id="SchoolForm" method="POST" action="." enctype="multipart/form-data" data-district-url="{% url 'location:ajax_load_district' %}">{% csrf_token %}
                 {% for hidden in form.hidden_fields %}
                     {{ hidden }}
                 {% endfor %}
-              <div class="card-body">
+              
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-3">
@@ -94,18 +96,14 @@
                           {% endfor %}
                       </div>
                       <div class="col-md-3">
-                        <label for="">{{ form.minimum_tution_fee.label }}*</label>
-                        {% render_field form.minimum_tution_fee class="form-control" placeholder=form.minimum_tution_fee.label %}
-                        {% for error in form.minimum_tution_fee.errors %}
+                        <label for="">{{ form.average_tution_fee.label }}*</label>
+                        {% render_field form.average_tution_fee class="form-control" placeholder=form.average_tution_fee.label %}
+                        {% for error in form.average_tution_fee.errors %}
                             <span class="help-block">{{ error }}</span>
                         {% endfor %}
                       </div>
                       <div class="col-md-3">
-                        <label for="">{{ form.maximum_tution_fee.label }}*</label>
-                          {% render_field form.maximum_tution_fee class="form-control" placeholder=form.maximum_tution_fee.label %}
-                          {% for error in form.maximum_tution_fee.errors %}
-                              <span class="help-block">{{ error }}</span>
-                          {% endfor %}
+                       
                       </div>
 
                       <div class="col-md-3">
@@ -167,7 +165,13 @@
                                            
                   </div>
                 </div>
+            
 
+            <div class="card-header bg-info">
+              <h3 class="card-title">Add Exams Results</h4>
+            </div>
+
+            
                 {{ formset.management_form }}
                 <fieldset>
                   {% for form in formset %}
@@ -175,6 +179,12 @@
                     <div class="col">
                       <div class="row">
                         {{ form.id  }}
+                        <div class="col">
+                          <div class="form-group">
+                            {{ form.classe.label_tag }}
+                            {% render_field form.classe class="form-control" %}
+                          </div>
+                        </div>
                         <div class="col">
                           <div class="form-group">
                             {{ form.year.label_tag }}
@@ -216,15 +226,15 @@
                     
                     {% if form.instance.pk %}
                       {% render_field form.DELETE class="form-check-input" %}
-                      <label class="form-check-label" for="delete">
+                      <!-- <label class="form-check-label" for="delete">
 						              {% trans "Delete" %}
-                      </label>
+                      </label> -->
                     {% endif %}
                   </div>
                   {% endfor %}
-                </fieldset>   
+                </fieldset> 
+            
 
-              </div>
               <div class="card-footer">
                 <button type="submit" class="btn btn-info">
                   <i class="fa fa-save mr-2"></i>
@@ -246,10 +256,10 @@
 <script>
     $('.myformset').formset({
         addText: '<i class="fas fa-plus-circle mr-2"></i>{% trans "Add Exam Results" %}',
-		addCssClass: 'btn btn-success',
-		deleteCssClass: 'text-danger m-2',
+		    addCssClass: 'btn btn-success',
+		    deleteCssClass: 'text-danger m-2',
         deleteText: '<i class="fas fa-times-circle"></i>',
-		prefix: '{{ formset.prefix }}',
+		    prefix: '{{ formset.prefix }}',
     });
 </script>
 
@@ -269,5 +279,28 @@
 
   });
 </script>
+
+<!-- <script>
+  $(document).ready(function () {
+    $('#project-id').change(function () {
+      var url = $('#form-id').attr('data-url');
+      console.log(url);
+
+      var projectID = $('#project-id').val();
+      console.log(projectID);
+
+      $.ajax({
+      url: url,
+      data: {
+        'projectID':projectID,
+      },
+      type: 'GET',
+      success: function(data) {
+        alert();
+      },
+    });
+  });
+});
+</script> -->
 
 {% endblock javascript %}

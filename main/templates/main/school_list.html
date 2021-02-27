@@ -1,0 +1,133 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block stylesheet %}
+
+<style>
+
+</style>
+
+{% endblock stylesheet %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="py-3 text-center border-bottom">
+            <img class="d-block mx-auto mb-3" src="{% static 'main/images/logo.jpg' %}" alt="" width="120" height="auto">
+            <h3 class="text-secondary">School Directive Analytics Results</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card border-light">
+                    <div class="card-header border-bottom border-primary border-2">
+                        <h3 class="text-primary">School List</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            {% if filter.qs %}
+                            <thead class="bg-primary text-light">
+                                <tr>
+                                    <th>S/N.</th>
+                                    <th>School Name</th>
+                                    <th>Gender</th>
+                                    <th>Accomodation</th>
+                                    <th>Ownership</th>
+                                    <th>Region</th>
+                                    <th>District</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            {% endif %}
+                            <tbody>
+                                {% for obj in filter.qs %}
+                                <tr>
+                                    <td>{{forloop.counter}}.</td>
+                                    <td>{{ obj.name }}</td>
+                                    <td>{{obj.gender}}</td>
+                                    <td>{{obj.accomodation_type}}</td>
+                                    <td>{{obj.ownership}}</td>
+                                    <td>{{obj.region}}</td>
+                                    <td>{{obj.district}}</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-primary" href="#">Apply</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <div class="text-center py-5">
+                                    <img src="{% static 'main/images/no_item.svg' %}" width="100" height="auto" alt="no item">
+                                    <h4 class="lead py-2">No School Found, Please Repeat</h4>
+                                </div>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <div class="border-bottom border-primary border-2 py-2">
+                            <h3>NECTA Results</h3>
+                        </div>               
+
+                        
+                        <div class="py-4">
+                            <canvas id="myChart" width="400" height="180"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+    <script>
+        $(document).ready(function () {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{% for o in filter.qs %}'{{o.name}}', {% endfor %}],
+                    datasets: [{
+                        label: 'Total Points',
+                        data: [{% for s in rank %}
+                    {{s.total_point}},
+                    {% endfor %}],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+               
+                options: {
+                    barValueSpacing: 20,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            }); 
+        });
+    </script>
+
+{% endblock javascript %}

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'multiselectfield',
     'formtools',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
