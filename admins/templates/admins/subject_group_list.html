@@ -1,0 +1,82 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+    <div class="container pt-3 pb-5">
+        <div class="card">
+            <div class="card-header border-bottom border-info">
+                <h3 class="text-title">School Subjects Groups</h3>
+            </div>
+            <div class="card-body">
+                <div class="float-right pb-2">
+                    <button id="create-book" class="btn btn-primary btn-md" type="button" name="button"><i class="fas fa-plus-circle mr-2"></i> Create Subject Group</button>
+                </div>
+                <div id="table">
+                    <table class="table table-sm table-bordered">
+                        <thead class="bg-primary text-light">
+                            <tr>
+                                <th>No.</th>
+                                <th>Subject group</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in subjects %}
+                            <tr>
+                                <td>{{forloop.counter}}.</td>
+                                <td>{{s.name}}</td>
+                                <td>
+                                    <button type="button" id="update-book" class="bs-modal btn btn-sm btn-primary" data-form-url="{% url 'admins:update_subject' s.pk %}">
+                                        <span class="fas fa-pencil-alt"></span>
+                                    </button>
+                                    <button type="button" id="delete-book" class="bs-modal btn btn-sm btn-danger" data-form-url="{% url 'admins:delete_subject' s.pk %}">
+                                        <span class="fa fa-trash"></span>
+                                      </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal 1 with id="create-book"-->
+<div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2 with id="modal" -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+    $(function () {
+  
+      // Update, Read and Delete book buttons open modal with id="modal" (default)
+      // The formURL is retrieved from the data of the element
+      $(".bs-modal").each(function () {
+        $(this).modalForm({
+            formURL: $(this).data('form-url')
+        });
+      });
+  
+       // Create book button opens form in modal with id="create-modal"
+      $("#create-book").modalForm({
+          formURL: "{% url 'admins:create_subject' %}",
+          modalID: "#create-modal"
+      });
+  
+    });
+  </script>
+{% endblock javascript %}

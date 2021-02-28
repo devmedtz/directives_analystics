@@ -65,13 +65,21 @@
                             </tbody>
                         </table>
 
-                        <div class="border-bottom border-primary border-2 py-2">
-                            <h3>NECTA Results</h3>
+                        <div class="border-bottom border-primary border-2 py-2 pt-5">
+                            <h4 class="text-title">NECTA Form 4 Ranks</h4>
+                        </div>               
+
+                        <div class="py-4">
+                            <canvas id="form_4Chart" width="400" height="180"></canvas>
+                        </div>
+
+                        <div class="border-bottom border-primary border-2 py-2 pt-5">
+                            <h4 class="text-title">NECTA Form 6 Ranks</h4>
                         </div>               
 
                         
                         <div class="py-4">
-                            <canvas id="myChart" width="400" height="180"></canvas>
+                            <canvas id="form_6Chart" width="400" height="180"></canvas>
                         </div>
                     </div>
                 </div>
@@ -86,18 +94,18 @@
 
     <script>
         $(document).ready(function () {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'bar',
+            var ctx = document.getElementById('form_4Chart').getContext('2d');
+            var form_4Chart = new Chart(ctx, {
+                type: 'horizontalBar',
                 data: {
                     labels: [{% for o in filter.qs %}'{{o.name}}', {% endfor %}],
                     datasets: [{
                         label: 'Total Points',
-                        data: [{% for s in rank %}
+                        data: [{% for s in form_4_rank %}
                     {{s.total_point}},
                     {% endfor %}],
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
+                            'green',
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 206, 86, 0.2)',
                             'rgba(75, 192, 192, 0.2)',
@@ -129,5 +137,52 @@
             }); 
         });
     </script>
+
+
+<script>
+    $(document).ready(function () {
+        var ctx = document.getElementById('form_6Chart').getContext('2d');
+        var form_6Chart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: [{% for o in filter.qs %}'{{o.name}}', {% endfor %}],
+                datasets: [{
+                    label: 'Total Points',
+                    data: [{% for s in form_6_rank %}
+                {{s.total_point}},
+                {% endfor %}],
+                    backgroundColor: [
+                        'green',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+           
+            options: {
+                barValueSpacing: 20,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        }); 
+    });
+</script>
 
 {% endblock javascript %}

@@ -13,6 +13,8 @@ django-import-export = "*"
 django-multiselectfield = "*"
 django-formtools = "*"
 django-filter = "*"
+django-active-link = "*"
+django-bootstrap-modal-forms = "*"
 
 [dev-packages]
 

@@ -87,6 +87,7 @@ class ExamRank(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
     school = models.ForeignKey(School, on_delete=models.SET_NULL,null=True)
+    classe = models.PositiveSmallIntegerField(blank=True, null=True)
 
     dv1T = models.PositiveIntegerField(blank=True, null=True)
     dv2T = models.PositiveIntegerField(blank=True, null=True)

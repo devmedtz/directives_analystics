@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import RadioSelect
-
+ 
 from main.models import School
 from location.models import Region, District
 

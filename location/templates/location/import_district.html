@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<div class="container">
+<div class="container pt-3 pb-3">
     <div class="row">
           <div class="col-md-6">
               {% include 'messages.html' %}
@@ -24,7 +24,8 @@
                     <!-- /.card-body -->
     
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Import</button>
+                      <button type="submit" class="btn btn-primary">
+                      <i class="fas fa-upload mr-2"></i> Import</button>
                     </div>
                   </form>
                 </div>
@@ -32,16 +33,16 @@
           <div class="col-md-6">
             <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">All Region</h3>
+                  <h3 class="card-title">All Districts</h3>
                 </div>
 
                 <div>
-                  <table class="table table-sm table-bordered">
+                  <table class="mx-2 table table-sm table-bordered">
                     <thead>
                       <tr>
                         <th>No.</th>
-                        <th>Name</th>
-                        <th>Population</th>
+                        <th>District</th>
+                        <th>Region</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -49,7 +50,7 @@
                       <tr>
                         <td>{{forloop.counter}}</td>
                         <td>{{d.name}}</td>
-                        <td>{{d.population}}</td>
+                        <td>{{d.region}}</td>
                       </tr>
                       {% endfor %}
                     </tbody>

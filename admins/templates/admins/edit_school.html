@@ -3,7 +3,20 @@
 {% load static i18n widget_tweaks %}
 {% load crispy_forms_tags %}
 
-{% block title %}Edit school Inforrmation{% endblock %}
+{% block title %}Update School{% endblock %}
+
+{% block stylesheet %}
+
+ <style>
+   .form-check {
+    position: relative;
+    display: inline-block;
+    padding-left: 15px;
+    margin: 10px 5px 5px 10px; 
+  }
+ </style>
+
+{% endblock stylesheet %}
 
 {% block content %}
 <div class="container-fluid" style="padding-top: 40px;">
@@ -12,14 +25,16 @@
           {% include 'messages.html' %}
           <div class="card card-info">
             <div class="card-header">
-              <h3 class="card-title">Edit School Information</h3>
+              <h3 class="card-title">Add School Information</h3>
             </div>
-      
+
+          <div class="card-body">
+
             <form id="SchoolForm" method="POST" action="." enctype="multipart/form-data" data-district-url="{% url 'location:ajax_load_district' %}">{% csrf_token %}
                 {% for hidden in form.hidden_fields %}
                     {{ hidden }}
                 {% endfor %}
-              <div class="card-body">
+              
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-3">
@@ -94,18 +109,14 @@
                           {% endfor %}
                       </div>
                       <div class="col-md-3">
-                        <label for="">{{ form.minimum_tution_fee.label }}*</label>
-                        {% render_field form.minimum_tution_fee class="form-control" placeholder=form.minimum_tution_fee.label %}
-                        {% for error in form.minimum_tution_fee.errors %}
+                        <label for="">{{ form.average_tution_fee.label }}*</label>
+                        {% render_field form.average_tution_fee class="form-control" placeholder=form.average_tution_fee.label %}
+                        {% for error in form.average_tution_fee.errors %}
                             <span class="help-block">{{ error }}</span>
                         {% endfor %}
                       </div>
                       <div class="col-md-3">
-                        <label for="">{{ form.maximum_tution_fee.label }}*</label>
-                          {% render_field form.maximum_tution_fee class="form-control" placeholder=form.maximum_tution_fee.label %}
-                          {% for error in form.maximum_tution_fee.errors %}
-                              <span class="help-block">{{ error }}</span>
-                          {% endfor %}
+                       
                       </div>
 
                       <div class="col-md-3">
@@ -116,20 +127,14 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-12">
-                        <label for="">{{ form.school_subjects.label }}*</label>
-                        <div class="form-check form-check-inline">
-                            {% render_field form.school_subjects class="form-check-input" placeholder=form.school_subjects.label type="checkbox" %}
-                        </div>
+                      {{form.school_subjects|as_crispy_field}}
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-12">
-                        <label for="">{{ form.subject_combination.label }}*</label>
-                        <div class="form-check form-check-inline">
-                            {% render_field form.subject_combination class="form-check-input" placeholder=form.subject_combination.label type="checkbox" %}
-                        </div>
+                      {{form.subject_combination|as_crispy_field}}
                     </div>
                   </div>
                 </div>
@@ -161,7 +166,13 @@
                                            
                   </div>
                 </div>
+            
 
+            <div class="card-header bg-info">
+              <h3 class="card-title">Add Exams Results</h4>
+            </div>
+
+            
                 {{ formset.management_form }}
                 <fieldset>
                   {% for form in formset %}
@@ -169,6 +180,12 @@
                     <div class="col">
                       <div class="row">
                         {{ form.id  }}
+                        <div class="col">
+                          <div class="form-group">
+                            {{ form.classe.label_tag }}
+                            {% render_field form.classe class="form-control" %}
+                          </div>
+                        </div>
                         <div class="col">
                           <div class="form-group">
                             {{ form.year.label_tag }}
@@ -210,19 +227,19 @@
                     
                     {% if form.instance.pk %}
                       {% render_field form.DELETE class="form-check-input" %}
-                      <label class="form-check-label" for="delete">
+                      <!-- <label class="form-check-label" for="delete">
 						              {% trans "Delete" %}
-                      </label>
+                      </label> -->
                     {% endif %}
                   </div>
                   {% endfor %}
-                </fieldset>   
+                </fieldset> 
+            
 
-              </div>
               <div class="card-footer">
                 <button type="submit" class="btn btn-info">
                   <i class="fa fa-save mr-2"></i>
-                  Submit</button>
+                  Update</button>
               </div>
             </form>
           </div>
@@ -240,10 +257,10 @@
 <script>
     $('.myformset').formset({
         addText: '<i class="fas fa-plus-circle mr-2"></i>{% trans "Add Exam Results" %}',
-		addCssClass: 'btn btn-success',
-		deleteCssClass: 'text-danger m-2',
+		    addCssClass: 'btn btn-success',
+		    deleteCssClass: 'text-danger m-2',
         deleteText: '<i class="fas fa-times-circle"></i>',
-		prefix: '{{ formset.prefix }}',
+		    prefix: '{{ formset.prefix }}',
     });
 </script>
 
@@ -263,5 +280,28 @@
 
   });
 </script>
+
+<!-- <script>
+  $(document).ready(function () {
+    $('#project-id').change(function () {
+      var url = $('#form-id').attr('data-url');
+      console.log(url);
+
+      var projectID = $('#project-id').val();
+      console.log(projectID);
+
+      $.ajax({
+      url: url,
+      data: {
+        'projectID':projectID,
+      },
+      type: 'GET',
+      success: function(data) {
+        alert();
+      },
+    });
+  });
+});
+</script> -->
 
 {% endblock javascript %}

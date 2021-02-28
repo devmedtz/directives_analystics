@@ -131,29 +131,13 @@
 			{% endfor %}
 		</div>
 
-		<div class="mb-2"> 
-			<label for="inputEmail3" class="col-form-label me-3">9. Review national Form 4 exams results of a school for </label>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="exam_4_review" id="id_exam_4_review_1" value="1" {% if values.exam_4_review == "1" %}checked="checked"{% endif %}>
-				<label class="form-check-label" for="id_exam_4_review_1">1 Year</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="exam_4_review" id="id_exam_4_review_2" value="3" {% if values.exam_4_review == "3" %}checked="checked"{% endif %}>
-				<label class="form-check-label" for="id_exam_4_review_2">3 Year</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="exam_4_review" id="id_exam_4_review_3" value="5" {% if values.exam_4_review == "5" %}checked="checked"{% endif %}>
-				<label class="form-check-label" for="id_exam_4_review_3">5 Year</label>
-			</div>
-		</div>
-
 		<div class="my-5 text-center border-bottom border-primary mb-2">
 			<h4>School Academics</h4>
 			<h5 class="lead">A'Level</h5>
 		</div>
 
 		<div class="mb-2">
-			<label for="inputEmail3" class="col-form-label me-3">10. Want a school with </label>
+			<label for="inputEmail3" class="col-form-label me-3">9. Want a school with </label>
 			{% for a in combinations %}
 			<div class="form-check form-check-inline">
 				<input class="form-check-input" type="checkbox" name="subject_combination" id="id_subject_combination_{{a.id}}" value="{{a.id}}"
@@ -164,29 +148,13 @@
 
 		</div>
 
-		<div class="mb-2">
-			<label for="inputEmail3" class="col-form-label me-3">11. Review national Form 6 exams results of a school for </label>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="exam_6_review" id="exam_6_review_1" value="1" {% if values.exam_6_review == "1" %}checked="checked"{% endif %}>
-				<label class="form-check-label" for="exam_6_review_1">1 Year</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="exam_6_review" id="exam_6_review_2" value="3" {% if values.exam_6_review == "3" %}checked="checked"{% endif %}>
-				<label class="form-check-label" for="exam_6_review_2">3 Year</label>
-			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="exam_6_review" id="exam_6_review_3" value="5" {% if values.exam_6_review == "5" %}checked="checked"{% endif %}>
-				<label class="form-check-label" for="exam_6_review_3">5 Year</label>
-			</div>
-		</div>
-
 		<div class="my-5 text-center border-bottom border-primary mb-3">
 			<h4>School Fees Ranges</h4>
 		</div>
 
 
 		<div class="row mb-4 g-3">
-			<label for="inputEmail3" class="col-sm-6 col-form-label">12. Want school with Tution fee of Range, Please place the range </label>
+			<label for="inputEmail3" class="col-sm-6 col-form-label">10. Want school with Tution fee of Range, Please place the range </label>
 			<div class="col-sm-3">
 				<div class="input-group">
 					<span class="input-group-text" id="basic-addon1">Tshs.</span>
@@ -203,7 +171,7 @@
 		</div>
 
 		<div class="mb-4">
-			<label for="inputEmail3" class="col-form-label me-3">13. Want a school with scholarship or supported by charity organization (no free) </label>
+			<label for="inputEmail3" class="col-form-label me-3">11. Want a school with scholarship or supported by charity organization (no free) </label>
 			<div class="form-check form-check-inline">
 				<input class="form-check-input" type="checkbox" name="charity_support" id="id_charity_support_1" value="1" {% if values.charity_support == '1' %}checked="checked"{% endif %}>
 				<label class="form-check-label" for="id_charity_support_1"></label>
@@ -211,7 +179,7 @@
 		</div>
 
 		<div class="row mb-4 g-3">
-			<label for="inputEmail3" class="col-sm-5 col-form-label">14. Choose a region/location of your interest here </label>
+			<label for="inputEmail3" class="col-sm-5 col-form-label">12. Choose a region/location of your interest here </label>
 			<div class="col-sm-3">
 				<div class="input-group">
 					{% render_field form.region class="form-control" placeholder=form.region.label %}
@@ -237,8 +205,6 @@
 			</div>
 			<div class="col-md-4"></div>
 		</div>
-
-		
 	</form>
  
 {% endblock %}

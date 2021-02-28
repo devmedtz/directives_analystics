@@ -13,51 +13,17 @@ def school_list(request):
 
 	f = SchoolFilter(request.GET, queryset=School.objects.all())
 
-	if 'exam_4_review' in request.GET:
-		exam_4_review = request.GET.get('exam_4_review', '')
-		start_o_year = (datetime.now() - timedelta(days=int(exam_4_review)*365)).year
-		end_o_year = datetime.now().year
+	schools = f.qs
 
-		# users = UserClasses.objects.filter(class_id=data['class_id'])
-		# user_details = User.objects.filter(id__in=users.values_list('id', flat=True))
+	form_4_rank = ExamRank.objects.filter(school__in=schools.values_list('id'), classe=4).order_by('total_point')
 
-		schools = f.qs
+	form_6_rank = ExamRank.objects.filter(school__in=schools.values_list('id'), classe=6).order_by('total_point')
 
-		print(schools)
-
-		dv1T = ExamResult.objects.filter(school_id__in=schools.values_list('id'), classe=4, year__range=(start_o_year,end_o_year)).annotate(total=Sum('division_one'))
-
-		rank = ExamRank.objects.filter(school__in=schools.values_list('id'))
-
-		for e in f.qs:
-			
-			dv2T = (ExamResult.objects.filter(school=e.id, classe=4, year__range=(start_o_year,end_o_year)).aggregate(total=Sum('division_two')))
-
-			dv3T = (ExamResult.objects.filter(school=e.id, classe=4, year__range=(start_o_year,end_o_year)).aggregate(total=Sum('division_three')))
-
-			dv4T = (ExamResult.objects.filter(school=e.id, classe=4, year__range=(start_o_year,end_o_year)).aggregate(total=Sum('division_four')))
-
-			dv0T = (ExamResult.objects.filter(school=e.id, classe=4, year__range=(start_o_year,end_o_year)).aggregate(total=Sum('division_zero')))
-
-		
-
-			# total_points = dv1T['total']*5.5 + dv2T['total']*1.5 + dv3T['total']*0.25 + dv4T['total']*-1.5 + dv0T['total']*-5.5
-
-			# print('total_points',total_points)
-
-	if 'exam_6_review' in request.GET:
-		exam_6_review = request.GET.get('exam_6_review', '')
-		start_a_year = (datetime.now() - timedelta(days=int(exam_6_review)*365)).year
-		end_a_year = datetime.now().year
-
-		print(start_a_year)
-		print(end_a_year)
 
 	context = {
 		'filter': f,
-		# 'total_points':total_points,
-		'dv1T':dv1T,
-		'rank':rank,
+		'form_4_rank':form_4_rank,
+		'form_6_rank':form_6_rank,
 
 	}
 

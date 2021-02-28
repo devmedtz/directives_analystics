@@ -1,35 +1,34 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect,get_object_or_404, HttpResponse, reverse
 from django.http import HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Max, Min, Sum, Count, Avg
-
 from datetime import datetime, timedelta
+from django.urls import reverse_lazy
+from django.views import generic
+
+from bootstrap_modal_forms.generic import (
+  BSModalCreateView,
+  BSModalUpdateView,
+  BSModalReadView,
+  BSModalDeleteView
+)
 
 from main.models import *
-from .forms import SchoolForm, ExamResultInlineFormSet, ExamResultForm
+from .forms import *
 
 @login_required
 def dashboard(request):
-    template_name = 'admins/dashboard.html'
+	template_name = 'admins/dashboard.html'
 
-    context = {}
+	context = {}
 
-    return render(request, template_name, context)
+	return render(request, template_name, context)
 
 
-def get_exam_rank(request, school_id):
-	
-	school_id = 4
+def get_o_exam_rank(request,school_id):
 
-	no_of_year = 4
-
-	classe = 4
-
-	start_year = (datetime.now() - timedelta(days=no_of_year*365)).year
-	end_year = datetime.now().year
-
-	exam_results = ExamResult.objects.filter(school=school_id, classe=classe, year__range=(start_year,end_year))
+	exam_results = ExamResult.objects.filter(school=school_id, classe=4)
 
 	dv1T = exam_results.aggregate(total=Sum('division_one'))
 	dv2T = exam_results.aggregate(total=Sum('division_two'))
@@ -38,7 +37,8 @@ def get_exam_rank(request, school_id):
 	dv0T = exam_results.aggregate(total=Sum('division_zero'))
 
 	exam_rank = ExamRank(
-		school_id = 4,
+		school_id = school_id,
+		classe = 4,
 		dv1T = dv1T['total'],
 		dv2T = dv2T['total'],
 		dv3T = dv3T['total'],
@@ -53,7 +53,36 @@ def get_exam_rank(request, school_id):
 	)
 	exam_rank.save()
 
-	return HttpResponse('Success')
+	return exam_rank
+
+def get_a_exam_rank(request,school_id):
+
+	exam_results = ExamResult.objects.filter(school=school_id, classe=6)
+
+	dv1T = exam_results.aggregate(total=Sum('division_one'))
+	dv2T = exam_results.aggregate(total=Sum('division_two'))
+	dv3T = exam_results.aggregate(total=Sum('division_three'))
+	dv4T = exam_results.aggregate(total=Sum('division_four'))
+	dv0T = exam_results.aggregate(total=Sum('division_zero'))
+
+	exam_rank = ExamRank(
+		school_id = school_id,
+		classe = 6,
+		dv1T = dv1T['total'],
+		dv2T = dv2T['total'],
+		dv3T = dv3T['total'],
+		dv4T = dv4T['total'],
+		dv0T = dv0T['total'],
+		dv1P = dv1T['total']*5.5,
+		dv2P = dv2T['total']*1.5,
+		dv3P = dv3T['total']*0.25,
+		dv4P = dv4T['total']*-1.5,
+		dv0P = dv0T['total']*-5.5,
+		total_point= (dv1T['total']*5.5)+(dv2T['total']*1.5)+(dv3T['total']*0.25)+(dv4T['total']*-1.5)+(dv0T['total']*-5.5)
+	)
+	exam_rank.save()
+
+	return exam_rank
 
 
 @login_required
@@ -107,8 +136,19 @@ def create_edit_school(request, id=None):
 					f_obj = SchoolSubject.objects.get(name=f)
 					school_form.school_subjects.add(f_obj)
 
+				school_id = school_form.id
+
+				exam_o_rank = get_o_exam_rank(request,school_id)
+
+				exam_a_rank = get_a_exam_rank(request,school_id)
+
+
 				messages.success(request, 'Success, School was created', extra_tags='alert alert-success')
-				return redirect(to='admins:create_school')
+
+				if id:
+					return redirect(reverse('admins:edit_school', kwargs={'id':id}))
+				else:
+					return redirect(to='admins:create_school')
 
 			else: 
 				messages.error(request, 'Errors occurred', extra_tags='alert alert-danger')
@@ -119,10 +159,12 @@ def create_edit_school(request, id=None):
 		form = SchoolForm(instance=school)
 		formset = ExamResultInlineFormSet(instance=school, prefix='all_exam_results')
 	
+	values = request.POST
 	context = {
 		'form': form,
 		'formset': formset,
-		'schools':schools
+		'schools':schools,
+		'values':values,
 	}
 	
 	if id:
@@ -144,3 +186,61 @@ def list_school(request):
 	template_name = 'admins/list_school.html'
 
 	return render(request, template_name, context)
+
+
+class SubjectGroupList(generic.ListView):
+	model = SchoolSubject
+	context_object_name = 'subjects'
+	template_name = 'admins/subject_group_list.html'
+
+# Create
+class SubjectCreateView(BSModalCreateView):
+	template_name = 'admins/create_subject_groups.html'
+	form_class = SchoolSubjectForm
+	success_message = 'Success: School subject was added.'
+	success_url = reverse_lazy('admins:subject_list')
+
+# Update
+class SubjectUpdateView(BSModalUpdateView):
+	model = SchoolSubject
+	template_name = 'admins/update_subject_group.html'
+	form_class = SchoolSubjectForm
+	success_message = 'Success: Subject group was updated.'
+	success_url = reverse_lazy('admins:subject_list')
+
+# Delete
+class SubjectDeleteView(BSModalDeleteView):
+	model = SchoolSubject
+	template_name = 'admins/delete.html'
+	context_object_name = 'obj'
+	success_message = 'Success: Subject Group was deleted.'
+	success_url = reverse_lazy('admins:subject_list')
+
+
+class CombinationList(generic.ListView):
+	model = SubjectCombination
+	context_object_name = 'combinations'
+	template_name = 'admins/combination_list.html'
+
+# Create
+class CombinationCreateView(BSModalCreateView):
+	template_name = 'admins/create_combination.html'
+	form_class = SubjectCombinationForm
+	success_message = 'Success: combination was added.'
+	success_url = reverse_lazy('admins:combination_list')
+
+# Update
+class CombinationUpdateView(BSModalUpdateView):
+	model = SubjectCombination
+	template_name = 'admins/update_combination.html'
+	form_class = SubjectCombinationForm
+	success_message = 'Success: Combination was updated.'
+	success_url = reverse_lazy('admins:combination_list')
+
+# Delete
+class CombinationDeleteView(BSModalDeleteView):
+	model = SubjectCombination
+	template_name = 'admins/delete.html'
+	context_object_name = 'obj'
+	success_message = 'Success: Combination was deleted.'
+	success_url = reverse_lazy('admins:combination_list')

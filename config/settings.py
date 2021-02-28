@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'multiselectfield',
     'formtools',
     'django_filters',
+    'active_link',
+    'bootstrap_modal_forms',
 ]
 
 MIDDLEWARE = [

@@ -38,15 +38,12 @@
                                 <td>{{school.region}}</td>
                                 <td>{{school.district}}</td>
                                 <td>
-                                    <a class="text-success mr-2" href="#">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
                                     <a class="text-info mr-2" href="{% url 'admins:edit_school' school.id %}">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a class="text-danger" href="#">
+                                    <!-- <a class="text-danger" href="#">
                                         <i class="fa fa-times-circle"></i>
-                                    </a>
+                                    </a> -->
                                 </td>
                             </tr>
                             {% endfor %}
