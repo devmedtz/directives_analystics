@@ -15,9 +15,9 @@ def school_list(request):
 
 	schools = f.qs
 
-	form_4_rank = ExamRank.objects.filter(school__in=schools.values_list('id'), classe=4).order_by('total_point')
+	form_4_rank = ExamRank.objects.filter(school__in=schools.values_list('id'), classe=4).order_by('-total_point')
 
-	form_6_rank = ExamRank.objects.filter(school__in=schools.values_list('id'), classe=6).order_by('total_point')
+	form_6_rank = ExamRank.objects.filter(school__in=schools.values_list('id'), classe=6).order_by('-total_point')
 
 
 	context = {
