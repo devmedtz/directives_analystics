@@ -28,9 +28,12 @@ def dashboard(request):
 
 def get_o_exam_rank(request,school_id):
 
-	exam_results = ExamResult.objects.filter(school=school_id, classe=4)
+	print(school_id)
 
+	exam_results = ExamResult.objects.filter(school=school_id, classe=4)
+	
 	dv1T = exam_results.aggregate(total=Sum('division_one'))
+	print(dv1T['total'])
 	dv2T = exam_results.aggregate(total=Sum('division_two'))
 	dv3T = exam_results.aggregate(total=Sum('division_three'))
 	dv4T = exam_results.aggregate(total=Sum('division_four'))
@@ -60,6 +63,7 @@ def get_a_exam_rank(request,school_id):
 	exam_results = ExamResult.objects.filter(school=school_id, classe=6)
 
 	dv1T = exam_results.aggregate(total=Sum('division_one'))
+	print(dv1T)
 	dv2T = exam_results.aggregate(total=Sum('division_two'))
 	dv3T = exam_results.aggregate(total=Sum('division_three'))
 	dv4T = exam_results.aggregate(total=Sum('division_four'))
@@ -124,6 +128,14 @@ def create_edit_school(request, id=None):
 					e.created_by = user
 					e.save()
 
+					school_id = school_form.id
+					print('school_id:',school_id)
+
+					if e.classe == 4:
+						exam_o_rank = get_o_exam_rank(request,school_id)
+					elif e.classe == 6:
+						exam_a_rank = get_a_exam_rank(request,school_id)
+
 				combination = form.cleaned_data['subject_combination']
 				subject = form.cleaned_data['school_subjects']
 				
@@ -136,12 +148,9 @@ def create_edit_school(request, id=None):
 					f_obj = SchoolSubject.objects.get(name=f)
 					school_form.school_subjects.add(f_obj)
 
-				school_id = school_form.id
+				
 
-				exam_o_rank = get_o_exam_rank(request,school_id)
-
-				exam_a_rank = get_a_exam_rank(request,school_id)
-
+				
 
 				messages.success(request, 'Success, School was created', extra_tags='alert alert-success')
 
