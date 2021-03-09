@@ -139,14 +139,15 @@ def create_edit_school(request, id=None):
 				combination = form.cleaned_data['subject_combination']
 				subject = form.cleaned_data['school_subjects']
 				
-				for f in combination:
-					f_obj = SubjectCombination.objects.get(name=f)
-					school_form.subject_combination.add(f_obj)
+				if combination:
+					for f in combination:
+						f_obj = SubjectCombination.objects.get(name=f)
+						school_form.subject_combination.add(f_obj)
 
-				
-				for f in subject:
-					f_obj = SchoolSubject.objects.get(name=f)
-					school_form.school_subjects.add(f_obj)
+				if subject:
+					for f in subject:
+						f_obj = SchoolSubject.objects.get(name=f)
+						school_form.school_subjects.add(f_obj)
 
 				
 
@@ -183,7 +184,7 @@ def create_edit_school(request, id=None):
 
 	return render(request, template_name, context)
 
-
+@login_required
 def list_school(request):
 
 	school_qs = School.objects.order_by('-created_at')
@@ -253,3 +254,9 @@ class CombinationDeleteView(BSModalDeleteView):
 	context_object_name = 'obj'
 	success_message = 'Success: Combination was deleted.'
 	success_url = reverse_lazy('admins:combination_list')
+
+
+class SchoolDeleteView(generic.DeleteView):
+	model = School
+	template_name = 'admins/comfirm_delete.html'
+	success_url = reverse_lazy('admins:list_school')

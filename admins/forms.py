@@ -8,8 +8,8 @@ from location.models import Region, District
 
 class SchoolForm(forms.ModelForm):
 	region = forms.ModelChoiceField(Region.objects.all(), empty_label='Select Region')
-	school_subjects = forms.ModelMultipleChoiceField(SchoolSubject.objects.all(), widget=forms.CheckboxSelectMultiple())
-	subject_combination = forms.ModelMultipleChoiceField(SubjectCombination.objects.all(), widget=forms.CheckboxSelectMultiple())
+	school_subjects = forms.ModelMultipleChoiceField(SchoolSubject.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False)
+	subject_combination = forms.ModelMultipleChoiceField(SubjectCombination.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False,)
 
 
 	class Meta:

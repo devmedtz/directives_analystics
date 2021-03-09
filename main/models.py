@@ -7,7 +7,7 @@ from .choices import *
 from location.models import Region, District
 
 User = get_user_model()
-
+ 
 class SubjectCombination(models.Model):
     name = models.CharField(max_length=50)
 
@@ -37,10 +37,10 @@ class School(models.Model):
  
     #School Academics - O'level
     curricular_system = models.CharField(max_length=100, choices=CURRICULAR_SYSTEM, verbose_name='What is curricular system use?')
-    school_subjects = models.ManyToManyField(SchoolSubject)
+    school_subjects = models.ManyToManyField(SchoolSubject, blank=True)
 
     #School Academics - A'level
-    subject_combination = models.ManyToManyField(SubjectCombination)
+    subject_combination = models.ManyToManyField(SubjectCombination, blank=True)
    
 
     #school fees

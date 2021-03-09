@@ -41,9 +41,9 @@
                                     <a class="text-info mr-2" href="{% url 'admins:edit_school' school.id %}">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <!-- <a class="text-danger" href="#">
+                                    <a class="text-danger" href="{% url 'admins:school_delete' school.id %}">
                                         <i class="fa fa-times-circle"></i>
-                                    </a> -->
+                                    </a>
                                 </td>
                             </tr>
                             {% endfor %}

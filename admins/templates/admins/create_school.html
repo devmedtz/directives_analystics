@@ -114,7 +114,7 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-12">
-                      <label for="">{{ form.school_subjects.label }}*</label><br>
+                      <label for="">{{ form.school_subjects.label }}(Optional)</label><br>
                       {% for value, text in form.school_subjects.field.choices %}
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" id="id_{{ forloop.counter0 }}" name="{{ form.school_subjects.name }}" type="checkbox" value="{{ value }}"{% if value in checked_school_subjects %} checked="checked"{% endif %}>
@@ -127,13 +127,16 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-12">
-                      <label for="">{{ form.subject_combination.label }}*</label><br>
+                      <label for="">{{ form.subject_combination.label }}(optional)</label><br>
                       {% for value, text in form.subject_combination.field.choices %}
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" id="id_{{ forloop.counter0 }}" name="{{ form.subject_combination.name }}" type="checkbox" value="{{ value }}"{% if value in checked_subject_combination %} checked="checked"{% endif %}>
                           <label class="form-check-label">{{ text }}</label>
                         </div>
                       {% endfor %}
+                      {% for error in form.subject_combination.errors %}
+                              <span class="help-block">{{ error }}</span>
+                          {% endfor %}
                     </div>
                   </div>
                 </div>
