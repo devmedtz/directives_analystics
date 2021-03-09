@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect,get_object_or_404, HttpResponse, r
 from django.http import HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Max, Min, Sum, Count, Avg
 from datetime import datetime, timedelta
 from django.urls import reverse_lazy
@@ -198,20 +199,20 @@ def list_school(request):
 	return render(request, template_name, context)
 
 
-class SubjectGroupList(generic.ListView):
+class SubjectGroupList(LoginRequiredMixin, generic.ListView):
 	model = SchoolSubject
 	context_object_name = 'subjects'
 	template_name = 'admins/subject_group_list.html'
 
 # Create
-class SubjectCreateView(BSModalCreateView):
+class SubjectCreateView(LoginRequiredMixin, BSModalCreateView):
 	template_name = 'admins/create_subject_groups.html'
 	form_class = SchoolSubjectForm
 	success_message = 'Success: School subject was added.'
 	success_url = reverse_lazy('admins:subject_list')
 
 # Update
-class SubjectUpdateView(BSModalUpdateView):
+class SubjectUpdateView(LoginRequiredMixin, BSModalUpdateView):
 	model = SchoolSubject
 	template_name = 'admins/update_subject_group.html'
 	form_class = SchoolSubjectForm
@@ -219,7 +220,7 @@ class SubjectUpdateView(BSModalUpdateView):
 	success_url = reverse_lazy('admins:subject_list')
 
 # Delete
-class SubjectDeleteView(BSModalDeleteView):
+class SubjectDeleteView(LoginRequiredMixin, BSModalDeleteView):
 	model = SchoolSubject
 	template_name = 'admins/delete.html'
 	context_object_name = 'obj'
@@ -227,20 +228,20 @@ class SubjectDeleteView(BSModalDeleteView):
 	success_url = reverse_lazy('admins:subject_list')
 
 
-class CombinationList(generic.ListView):
+class CombinationList(LoginRequiredMixin, generic.ListView):
 	model = SubjectCombination
 	context_object_name = 'combinations'
 	template_name = 'admins/combination_list.html'
 
 # Create
-class CombinationCreateView(BSModalCreateView):
+class CombinationCreateView(LoginRequiredMixin, BSModalCreateView):
 	template_name = 'admins/create_combination.html'
 	form_class = SubjectCombinationForm
 	success_message = 'Success: combination was added.'
 	success_url = reverse_lazy('admins:combination_list')
 
 # Update
-class CombinationUpdateView(BSModalUpdateView):
+class CombinationUpdateView(LoginRequiredMixin, BSModalUpdateView):
 	model = SubjectCombination
 	template_name = 'admins/update_combination.html'
 	form_class = SubjectCombinationForm
@@ -248,7 +249,7 @@ class CombinationUpdateView(BSModalUpdateView):
 	success_url = reverse_lazy('admins:combination_list')
 
 # Delete
-class CombinationDeleteView(BSModalDeleteView):
+class CombinationDeleteView(LoginRequiredMixin, BSModalDeleteView):
 	model = SubjectCombination
 	template_name = 'admins/delete.html'
 	context_object_name = 'obj'
@@ -256,7 +257,7 @@ class CombinationDeleteView(BSModalDeleteView):
 	success_url = reverse_lazy('admins:combination_list')
 
 
-class SchoolDeleteView(generic.DeleteView):
+class SchoolDeleteView(LoginRequiredMixin, generic.DeleteView):
 	model = School
 	template_name = 'admins/comfirm_delete.html'
 	success_url = reverse_lazy('admins:list_school')
