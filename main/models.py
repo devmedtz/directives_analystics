@@ -44,7 +44,7 @@ class School(models.Model):
    
 
     #school fees
-    average_tution_fee = models.DecimalField(max_digits=9, decimal_places=0, verbose_name='Average Tution Fee per Year')
+    average_tution_fee = models.DecimalField(max_digits=9, decimal_places=0, verbose_name='Average Tution Fee per Year', blank=True, null=True)
     no_fee = models.BooleanField(default=False, verbose_name='School has scholarship or supported by charity (no-fee)?')
 
     #school location
