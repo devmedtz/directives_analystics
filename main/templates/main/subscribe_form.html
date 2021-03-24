@@ -1,0 +1,26 @@
+{% load crispy_forms_tags %}
+
+<form method="post" action="">
+  {% csrf_token %}
+
+  <div class="modal-header bg-primary text-light">
+    <h3 class="modal-title">Subscribe</h3>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+
+  <div class="modal-body">
+      <p>Write your name and whatsapp number to receive more school's information in video clips and pictures</p>
+
+    {{form|crispy}}
+
+    {% for s in filter.qs %}
+
+    <input type="hidden" name="school_id" value="{{s.id}}">
+
+    {% endfor %}
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+
+</form>

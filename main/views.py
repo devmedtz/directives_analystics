@@ -1,10 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from datetime import datetime, timedelta
 from django.db.models import Max, Min, Sum, Count, Avg
+from bootstrap_modal_forms.generic import (
+  BSModalCreateView,
+)
 
 from .models import *
 
-from .forms import SchoolForm
+from .forms import SchoolForm,SubscribeForm
 
 from .filter import SchoolFilter
 
@@ -127,3 +131,24 @@ def homepage(request):
 
 	
 	return render(request, template_name, context)
+
+
+# Create
+class SubscribeCreateView(BSModalCreateView):
+	template_name = 'main/subscribe_form.html'
+	form_class = SubscribeForm
+	success_message = 'Success: School subject was added.'
+	success_url = reverse_lazy('main:school_list')
+
+	def post(self, request, *args, **kwargs):
+
+		form = SubscribeForm()
+		school_id = request.POST.getlist('school_id')
+		print('school_id:',school_id)
+
+		if form.is_valid():
+			form = form.save(commit=False)
+			form.save()
+			return redirect('main:school_list')
+		else:
+			return redirect('main:school_list')

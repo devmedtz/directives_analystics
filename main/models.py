@@ -107,3 +107,11 @@ class ExamRank(models.Model):
     def __str__(self):
         return self.school.name
 
+
+class Subscribe(models.Model):
+    school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=100, verbose_name="Full Name")
+    phone = models.CharField(max_length=14, help_text='255xxxxxxxxx')
+
+    def __str__(self):
+        return self.name

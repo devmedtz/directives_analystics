@@ -34,8 +34,6 @@
                                     <th>S/N.</th>
                                     <th>School Name</th>
                                     <th>Gender</th>
-                                    <th>Accomodation</th>
-                                    <th>Ownership</th>
                                     <th>Region</th>
                                     <th>District</th>
                                     <th>Action</th>
@@ -47,9 +45,7 @@
                                 <tr>
                                     <td>{{forloop.counter}}.</td>
                                     <td>{{ obj.name }}</td>
-                                    <td>{{obj.gender}}</td>
                                     <td>{{obj.accomodation_type}}</td>
-                                    <td>{{obj.ownership}}</td>
                                     <td>{{obj.region}}</td>
                                     <td>{{obj.district}}</td>
                                     <td>
@@ -64,6 +60,10 @@
                                 {% endfor %}
                             </tbody>
                         </table>
+
+                        <div>
+                            <button type="button" class="btn btn-success btn-sm" id="subscribe-button" name="button">Get More Info</button>
+                        </div>
 
                         <div class="border-bottom border-primary border-2 py-2 pt-5">
                             <h4 class="text-title">NECTA Form 4 Ranks</h4>
@@ -88,9 +88,26 @@
         </div>
     </div>
 
+    <!-- Modal 1 with id="create-book"-->
+<div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
 
 {% block javascript %}
+
+    <script>
+        $(document).ready(function () {    
+            $("#subscribe-button").modalForm({
+                formURL: "{% url 'main:subscribe' %}",
+                modalID: "#create-modal"
+            });
+        });
+    </script>
 
     <script>
         $(document).ready(function () {

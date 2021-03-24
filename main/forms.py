@@ -1,7 +1,9 @@
+import re
 from django import forms
 from django.forms import RadioSelect
+from bootstrap_modal_forms.forms import BSModalModelForm
  
-from main.models import School
+from main.models import School, Subscribe
 from location.models import Region, District
 
 
@@ -40,3 +42,19 @@ class SchoolForm(forms.ModelForm):
 				pass
 		elif self.instance.pk:
 			self.fields['district'].queryset = self.instance.region.district_set.order_by('id')
+
+
+class SubscribeForm(BSModalModelForm):
+
+	class Meta:
+		model = Subscribe
+		fields = ['name','phone',]
+
+	# def clean_phone(self):
+	# 	phone = self.cleaned_data.get('phone')
+	# 	x = re.search("^255[0-9]{9}$", phone)
+
+	# 	if not x:
+	# 		raise forms.ValidationError(
+	# 			"Phone number must in format 255xxxxxxxxx")
+	# 	return phone

@@ -29,8 +29,6 @@ def dashboard(request):
 
 def get_o_exam_rank(request,school_id):
 
-	print(school_id)
-
 	exam_results = ExamResult.objects.filter(school=school_id, classe=4)
 	
 	dv1T = exam_results.aggregate(total=Sum('division_one'))
@@ -56,7 +54,7 @@ def get_o_exam_rank(request,school_id):
 		total_point= (dv1T['total']*5.5)+(dv2T['total']*1.5)+(dv3T['total']*0.25)+(dv4T['total']*-1.5)+(dv0T['total']*-5.5)
 	)
 	exam_rank.save()
-
+	
 	return exam_rank
 
 def get_a_exam_rank(request,school_id):
