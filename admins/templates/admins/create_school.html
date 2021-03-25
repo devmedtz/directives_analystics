@@ -96,7 +96,7 @@
                           {% endfor %}
                       </div>
                       <div class="col-md-3">
-                        <label for="">{{ form.average_tution_fee.label }}*</label>
+                        <label for="">{{ form.average_tution_fee.label }}(optional)</label>
                         {% render_field form.average_tution_fee class="form-control" placeholder=form.average_tution_fee.label %}
                         {% for error in form.average_tution_fee.errors %}
                             <span class="help-block">{{ error }}</span>
