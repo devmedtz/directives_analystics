@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from datetime import datetime, timedelta
 from django.db.models import Max, Min, Sum, Count, Avg
@@ -18,6 +18,35 @@ def school_list(request):
 	f = SchoolFilter(request.GET, queryset=School.objects.all())
 
 	schools = f.qs
+
+	fee_from = request.GET.get('fee_from')
+	
+
+	search_result = SearchResult(
+		gender = request.GET.get('gender'),
+		accomodation_type = request.GET.get('accomodation_type'),
+		class_size = request.GET.get('class_size'),
+		ownership = request.GET.get('ownership'),
+		school_multicultural = request.GET.get('school_multicultural'),
+		school_location = request.GET.get('school_location'),
+		curricular_system = request.GET.get('curricular_system'),
+		fee_from = request.GET.get('fee_from'),
+		fee_to = request.GET.get('fee_to'),
+		no_fee = request.GET.get('charity_support'),
+		region_id = request.GET.get('region'),
+		district_id = request.GET.get('district'),
+		phone = request.GET.get('phone'),
+	)
+	search_result.save()
+	search_result.school_subjects.set(request.GET.getlist('school_subjects'))
+	search_result.subject_combination.set(request.GET.getlist('subject_combination'))
+	search_result.school.set(schools)
+	
+
+	for school in schools:
+		sc = get_object_or_404(School, id=school.id)
+		sc.search_count += 1
+		sc.save()
 
 	form_4_rank = ExamRank.objects.filter(school__in=schools.values_list('id'), classe=4).order_by('total_point')
 
@@ -39,7 +68,6 @@ def homepage(request):
 
 	school_qs = School.objects.order_by('-created_at')
 	form = SchoolForm(use_required_attribute=False)
-
 
 	if 'gender' in request.GET:
 		gender = request.GET['gender']
@@ -73,51 +101,26 @@ def homepage(request):
 
 	if 'school_subjects' in request.GET:
 		school_subjects = request.GET.getlist('school_subjects')
-		print('school_subjects:',school_subjects)
 		if school_subjects:
 			school_qs = school_qs.filter(school_subjects=school_subjects)
-			print('school_qs2:',school_qs)
 
 	if 'exam_4_review' in request.GET:
 		exam_4_review = request.GET['exam_4_review']
 		if exam_4_review:
 			pass
-			#school_qs = school_qs.filter(curricular_system=curricular_system)
 
 	if 'exam_6_review' in request.GET:
 		exam_6_review = request.GET['exam_6_review']
 		if exam_6_review:
 			pass
-			#school_qs = school_qs.filter(curricular_system=curricular_system)
 
 	if 'combination' in request.GET:
 		combination = request.GET.getlist('combination')
-
-		print('combination:', combination)
 		if combination:
 			school_qs = school_qs.filter(subject_combination__in=combination)
-			print('sq:',school_qs)
-
-	# if 'fee_from' and 'fee_to' in request.GET:
-	# 	fee_from = request.GET.get('fee_from', 0)
-	# 	fee_to = request.GET.get('fee_to', 50000000)
-	# 	if fee_from and fee_to:
-	# 		school_qs = school_qs.filter(average_tution_fee__gte=fee_from).filter(average_tution_fee__lte=fee_to)
-
-
-	# if 'charity_support' in request.GET:
-	# 		charity_support = request.GET.get('charity_support', 0)
-	# 		print(charity_support)
-	# 		if charity_support:
-	# 			school_qs = school_qs.filter(no_fee=charity_support)
-		
-
-
-	print('school_qs:', school_qs)
 	 
 	subjects = SchoolSubject.objects.all()
 	combination = SubjectCombination.objects.all()
-	# print('school_subjects:',school_subjects)
 
 	context = {
 		'school_qs':school_qs,

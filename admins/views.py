@@ -22,7 +22,11 @@ from .forms import *
 def dashboard(request):
 	template_name = 'admins/dashboard.html'
 
-	context = {}
+	schools = School.objects.all().order_by('-search_count')[:10]
+
+	context = {
+		'schools':schools
+	}
 
 	return render(request, template_name, context)
 

@@ -50,6 +50,7 @@ class School(models.Model):
     #school location
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     district = models.ForeignKey(District, on_delete=models.CASCADE)
+    search_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return str(self.name)
@@ -61,6 +62,46 @@ class School(models.Model):
             output_size = (300, 300)
             logo.thumbnail(output_size)
             logo.save(self.logo.path)
+
+
+class SearchResult(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    gender = models.CharField(max_length=100, blank=True, null=True)
+
+    accomodation_type = models.CharField(max_length=100, blank=True, null=True)
+
+    class_size = models.CharField(max_length=100, blank=True, null=True)
+
+    ownership = models.CharField(max_length=100, blank=True, null=True)
+
+    school_multicultural = models.CharField(max_length=100, blank=True, null=True)
+
+    school_location = models.CharField(max_length=100, blank=True, null=True)
+ 
+    curricular_system = models.CharField(max_length=100, blank=True, null=True)
+
+    school_subjects = models.ManyToManyField(SchoolSubject, blank=True)
+
+    subject_combination = models.ManyToManyField(SubjectCombination, blank=True)
+
+    fee_from = models.CharField(max_length=100, blank=True, null=True)
+    fee_to = models.CharField(max_length=100, blank=True, null=True)
+
+    no_fee = models.CharField(max_length=100, blank=True, null=True)
+
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, blank=True, null=True)
+    district = models.ForeignKey(District, on_delete=models.CASCADE, blank=True, null=True)
+
+    phone = models.CharField(max_length=14, blank=True, null=True)
+
+    school = models.ManyToManyField(School, blank=True)
+
+
+    def __str__(self):
+        return str(self.phone)
+
 
 
 class ExamResult(models.Model):
