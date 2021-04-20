@@ -30,6 +30,16 @@ def dashboard(request):
 
 	return render(request, template_name, context)
 
+@login_required
+def search_school_results(request):
+
+	search_results = SearchResult.objects.all().order_by('-created_at')
+	context = {
+		'search_results':search_results
+	}
+	template_name = 'admins/search_school_result.html'
+	return render(request, template_name, context)
+
 
 def get_o_exam_rank(request,school_id):
 

@@ -21,5 +21,6 @@ urlpatterns = [
     path('combination-list/', views.CombinationList.as_view(), name='combination_list'),
     path('create-combination/', views.CombinationCreateView.as_view(), name='create_combination'),
     path('update-combination/<int:pk>', views.CombinationUpdateView.as_view(), name='update_combination'),
-    path('delete-combination/<int:pk>', views.CombinationDeleteView.as_view(), name='delete_combination')
+    path('delete-combination/<int:pk>', views.CombinationDeleteView.as_view(), name='delete_combination'),
+    path('search-result/', views.search_school_results, name='search_result')
 ]

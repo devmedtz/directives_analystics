@@ -96,7 +96,7 @@ class SearchResult(models.Model):
 
     phone = models.CharField(max_length=14, blank=True, null=True)
 
-    school = models.ManyToManyField(School, blank=True)
+    school = models.ManyToManyField(School, blank=True, related_name='schools')
 
 
     def __str__(self):
