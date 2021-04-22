@@ -1,0 +1,81 @@
+{% load widget_tweaks %}
+
+<div class="modal-header bg-info text-light">
+  <p class="modal-title">Search Keywords</p>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  {% for s in search_list %}
+    <table class="table table-bordered table-striped table-hover table-sm">
+        <thead>
+            <tr>
+                <th>Search Keyword</th>
+                <th>Resuls</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Gender</td>
+                <td>{{s.search.gender}}</td>
+            </tr>
+            <tr>
+                <td>Accomodation</td>
+                <td>{{s.search.accomodation_type}}</td>
+            </tr>
+            <tr>
+                <td>Class Size</td>
+                <td>{{s.search.class_size}}</td>
+            </tr>
+            <tr>
+                <td>Ownership</td>
+                <td>{{s.search.ownership}}</td>
+            </tr>
+            <tr>
+                <td>Multicultural</td>
+                <td>{{s.search.school_multicultural}}</td>
+            </tr>
+            <tr>
+                <td>School Location</td>
+                <td>{{s.search.school_location}}</td>
+            </tr>
+            <tr>
+                <td>Curricular System</td>
+                <td>{{s.search.curricular_system}}</td>
+            </tr>
+            <tr>
+                <td>School Subjects</td>
+                <td>{{s.search.school_subjects}}</td>
+            </tr>
+            <tr>
+                <td>Subject Combination</td>
+                <td>{{s.search.subject_combination}}</td>
+            </tr>
+            <tr>
+                <td>Fee Range</td>
+                <td>{{s.search.fee_from}} - {{s.search.fee_to}}</td>
+            </tr>
+            <tr>
+                <td>No Fee</td>
+                <td>{{s.search.no_fee}}</td>
+            </tr>
+            <tr>
+                <td>Region</td>
+                <td>{{s.search.region}}</td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td>{{s.search.district}}</td>
+            </tr>
+        </tbody>
+    </table>
+  {% endfor %}
+
+
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>

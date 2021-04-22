@@ -22,5 +22,9 @@ urlpatterns = [
     path('create-combination/', views.CombinationCreateView.as_view(), name='create_combination'),
     path('update-combination/<int:pk>', views.CombinationUpdateView.as_view(), name='update_combination'),
     path('delete-combination/<int:pk>', views.CombinationDeleteView.as_view(), name='delete_combination'),
-    path('search-result/', views.search_school_results, name='search_result')
+    path('search-result/', views.search_school_results, name='search_result'),
+    path('more-info-request/', views.more_info_request, name='more_info_request'),
+    path('read-school/<int:pk>', views.SchoolReadView.as_view(), name='read_school'),
+    path('read-search/<int:pk>', views.SearchReadView.as_view(), name='read_search'),
+    path('change-request-status/<int:id>/', views.change_request_status, name='change_request_status')
 ]

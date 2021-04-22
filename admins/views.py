@@ -40,6 +40,54 @@ def search_school_results(request):
 	template_name = 'admins/search_school_result.html'
 	return render(request, template_name, context)
 
+@login_required
+def more_info_request(request):
+
+	qs = Subscribe.objects.filter(search__has_any_keys=['gender'])
+
+	context = {'qs':qs}
+	
+	template_name = 'admins/more_info_request.html'
+	return render(request, template_name, context)
+
+
+class SchoolReadView(LoginRequiredMixin, BSModalReadView):
+	model = Subscribe
+	template_name = 'admins/read_school.html'
+	context_object_name = 'school'
+
+	def get_context_data(self, **kwargs):
+		context = super(SchoolReadView, self).get_context_data(**kwargs)
+
+		school_qs = Subscribe.objects.filter(pk=self.kwargs.get('pk'))
+
+		context['schools'] = school_qs
+		return context
+
+
+class SearchReadView(LoginRequiredMixin, BSModalReadView):
+	model = Subscribe
+	template_name = 'admins/read_search.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(SearchReadView, self).get_context_data(**kwargs)
+
+		new_sq = Subscribe.objects.filter(pk=self.kwargs.get('pk'),search__has_any_keys=['gender'])
+
+		context['search_list'] = new_sq
+		return context
+
+@login_required
+def change_request_status(request, id):
+
+	search = get_object_or_404(Subscribe, id=id)
+	search.status = True
+	search.save()
+
+	return redirect('admins:more_info_request')
+
+
+
 
 def get_o_exam_rank(request,school_id):
 

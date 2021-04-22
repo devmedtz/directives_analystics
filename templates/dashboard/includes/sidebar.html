@@ -30,6 +30,12 @@
 						<p>Dashboard</p></a>
 					</li>
 					<li class="nav-item">
+						<a href="{% url 'admins:more_info_request' %}" class="nav-link {% active_link 'admins:more_info_request' 'active' %}">
+							<i class="nav-icon fas fa-info-circle"></i>
+						<p>More Info Request</p>
+						</a>
+					</li>
+					<li class="nav-item">
 						<a href="{% url 'admins:search_result' %}" class="nav-link {% active_link 'admins:search_result' 'active' %}">
 						<i class="nav-icon fas fa-search"></i>
 						<p>Search Results</p></a>

@@ -1,0 +1,116 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}School List{% endblock %}
+
+{% block content %}
+<section class="content">
+    <div class="container-fluid" style="padding-top: 40px;">
+      <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-info text-light">
+                      <h3 class="card-title">More info request</h3>
+                    </div>
+                    <div class="card-body">
+                      <table id="example1" class="table table-sm table-bordered">
+                        <thead>
+                        <tr class="bg-info text-light">
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>IP Address</th>
+                            <th>School List</th>
+                            <th>Search Keywords</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in qs %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{s.name|capfirst}}</td>
+                                <td>{{s.phone}}</td>
+                                <td>{{s.ip}}</td>
+                                <td>
+                                    <button type="button" id="read-school-{{s.id}}" class="bs-modal btn btn-sm btn-primary" data-form-url="{% url 'admins:read_school' s.pk %}">
+                                        <span class="fa fa-eye"></span>
+                                      </button>
+                                </td>
+                                <td>
+                                    <button type="button" id="read-search-{{s.id}}" class="bs-modal btn btn-sm btn-info" data-form-url="{% url 'admins:read_search' s.pk %}">
+                                        view keywords
+                                      </button>
+                                </td>
+                                <td>
+                                    {% if s.status == True %}
+                                        <span class="badge bg-success">Already Sent</span>
+                                    {% else %} 
+                                    <span class="badge bg-warning">Pending</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if s.status == True %}
+                                    {% else %}
+                                    <a class="btn btn-secondary btn-sm" href="{% url 'admins:change_request_status' s.id %}">Change status</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal 1 with id="create-book"-->
+<div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal 2 with id="modal" -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+    $(function () {
+  
+      // Read book buttons
+      $("button[id]").each(function () {
+          $(this).modalForm({formURL: $(this).data("form-url")});
+      });
+  
+    });
+  </script>
+
+<script>
+	$(function () {
+	  $("#example1").DataTable({
+		"responsive": true, "lengthChange": false, "autoWidth": false,
+	  }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+	  $('#example2').DataTable({
+		"paging": true,
+		"lengthChange": false,
+		"searching": false,
+		"ordering": true,
+		"info": true,
+		"autoWidth": false,
+		"responsive": true,
+	  });
+	});
+  </script>
+
+
+{% endblock javascript %}

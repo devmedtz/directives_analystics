@@ -102,6 +102,9 @@ class SearchResult(models.Model):
     def __str__(self):
         return str(self.phone)
 
+    class Meta:
+        ordering = ['-created_at']
+
 
 
 class ExamResult(models.Model):
@@ -155,6 +158,12 @@ class Subscribe(models.Model):
     ip = models.GenericIPAddressField(blank=True, null=True)
     name = models.CharField(max_length=100, verbose_name="Name")
     phone = models.CharField(max_length=12)
+    school = models.JSONField(blank=True, null=True)
+    search = models.JSONField(blank=True, null=True)
+    status = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return str(self.school)
+
+    class Meta:
+        ordering = ['-created_at']

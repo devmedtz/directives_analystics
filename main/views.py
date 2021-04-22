@@ -32,9 +32,26 @@ def school_list(request):
 
 	schools = f.qs
 
-	data = serializers.serialize('json', schools)
-	data = json.loads(data)
+	new_sq = Subscribe.objects.filter(school__has_any_keys=['gender'])
+
+	for s in new_sq:
+		print('search:', s.search['gender'])
+
+	school_qs = Subscribe.objects.all()
+
+	for a in school_qs:
+		for x in a.school:
+			print('schools:', x['fields']['name'])
+
+	
+
+	data = serializers.serialize('json', schools, fields=('name',))
+	
 	request.session['schools'] = data
+
+	search = request.GET
+	request.session['search'] = search
+
 
 	fee_from = request.GET.get('fee_from')
 	
@@ -71,6 +88,7 @@ def school_list(request):
 
 
 	context = {
+		'values':request.GET,
 		'filter': f,
 		'form_4_rank':form_4_rank,
 		'form_6_rank':form_6_rank,
@@ -161,8 +179,11 @@ class SubscribeCreateView(BSModalCreateView):
 	success_url = reverse_lazy('main:school_list')
 
 	def form_valid(self, form):
+		schools = self.request.session.get('schools')
+		search = self.request.session.get('search')
 		ip = get_client_ip(self.request)
-		print('IP:',ip)
 		form.instance.ip = ip
+		form.instance.school = schools
+		form.instance.search = search
 		return super().form_valid(form)
 
