@@ -100,7 +100,7 @@ class SearchResult(models.Model):
 
 
     def __str__(self):
-        return str(self.phone)
+        return str(self.ip)
 
     class Meta:
         ordering = ['-created_at']
