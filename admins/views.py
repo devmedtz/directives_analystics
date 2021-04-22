@@ -4,9 +4,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Max, Min, Sum, Count, Avg
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from django.urls import reverse_lazy
 from django.views import generic
+
+from django.db.models import Avg, Sum
+from datetime import datetime, timedelta
 
 from bootstrap_modal_forms.generic import (
   BSModalCreateView,
@@ -23,9 +26,21 @@ def dashboard(request):
 	template_name = 'admins/dashboard.html'
 
 	schools = School.objects.all().order_by('-search_count')[:10]
+	total_school = School.objects.all().count()
+	total_search = SearchResult.objects.count()
+
+	today_search = SearchResult.objects.filter(created_at__date=date.today()).count()
+
+	one_day_ago = datetime.today() - timedelta(days=1)
+
+	yesterday_search = SearchResult.objects.filter(created_at__lte=one_day_ago).count()
 
 	context = {
-		'schools':schools
+		'schools':schools,
+		'total_school':total_school,
+		'total_search':total_search,
+		'today_search':today_search,
+		'yesterday_search':yesterday_search,
 	}
 
 	return render(request, template_name, context)

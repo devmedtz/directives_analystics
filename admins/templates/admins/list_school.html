@@ -17,9 +17,9 @@
                         <tr class="bg-info text-light">
                             <th>No.</th>
                             <th>School Name</th>
-                            <th>Ownership</th>
                             <th>Gender</th>
                             <th>Mode</th>
+                            <th># Search</th>
                             <th>Region</th>
                             <th>District</th>
                             <th>Actions</th>
@@ -29,12 +29,10 @@
                             {% for school in school_qs %}
                             <tr>
                                 <td>{{forloop.counter}}</td>
-                                <td>
-                                    <a href="#">{{school.name}}</a>
-                                </td>
-                                <td>{{school.ownership}}</td>
+                                <td>{{school.name}}</td>
                                 <td>{{school.gender}}</td>
                                 <td>{{school.accomodation_type}}</td>
+                                <td>{{school.search_count}}</td>
                                 <td>{{school.region}}</td>
                                 <td>{{school.district}}</td>
                                 <td>
