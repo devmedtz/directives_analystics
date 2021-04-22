@@ -5,6 +5,8 @@ from django.db.models import Max, Min, Sum, Count, Avg
 from bootstrap_modal_forms.generic import (
   BSModalCreateView,
 )
+from django.core import serializers
+import json
 
 from .models import *
 
@@ -13,11 +15,26 @@ from .forms import SchoolForm,SubscribeForm
 from .filter import SchoolFilter
 
 
+def get_client_ip(request):
+	x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+	if x_forwarded_for:
+		ip = x_forwarded_for.split(',')[-1].strip()
+		print('ip1',ip)
+	else:
+		ip = request.META.get('REMOTE_ADDR')
+		print('ip2',ip)
+	return ip
+
+
 def school_list(request):
 
 	f = SchoolFilter(request.GET, queryset=School.objects.all())
 
 	schools = f.qs
+
+	data = serializers.serialize('json', schools)
+	data = json.loads(data)
+	request.session['schools'] = data
 
 	fee_from = request.GET.get('fee_from')
 	
@@ -35,7 +52,7 @@ def school_list(request):
 		no_fee = request.GET.get('charity_support'),
 		region_id = request.GET.get('region'),
 		district_id = request.GET.get('district'),
-		phone = request.GET.get('phone'),
+		ip = get_client_ip(request),
 	)
 	search_result.save()
 	search_result.school_subjects.set(request.GET.getlist('school_subjects'))
@@ -143,15 +160,9 @@ class SubscribeCreateView(BSModalCreateView):
 	success_message = 'Success: School subject was added.'
 	success_url = reverse_lazy('main:school_list')
 
-	def post(self, request, *args, **kwargs):
+	def form_valid(self, form):
+		ip = get_client_ip(self.request)
+		print('IP:',ip)
+		form.instance.ip = ip
+		return super().form_valid(form)
 
-		form = SubscribeForm()
-		school_id = request.POST.getlist('school_id')
-		print('school_id:',school_id)
-
-		if form.is_valid():
-			form = form.save(commit=False)
-			form.save()
-			return redirect('main:school_list')
-		else:
-			return redirect('main:school_list')

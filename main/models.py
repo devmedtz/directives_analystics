@@ -94,7 +94,7 @@ class SearchResult(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE, blank=True, null=True)
     district = models.ForeignKey(District, on_delete=models.CASCADE, blank=True, null=True)
 
-    phone = models.CharField(max_length=14, blank=True, null=True)
+    ip = models.GenericIPAddressField(blank=True, null=True)
 
     school = models.ManyToManyField(School, blank=True, related_name='schools')
 
@@ -150,9 +150,11 @@ class ExamRank(models.Model):
 
 
 class Subscribe(models.Model):
-    school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=100, verbose_name="Full Name")
-    phone = models.CharField(max_length=14, help_text='255xxxxxxxxx')
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    ip = models.GenericIPAddressField(blank=True, null=True)
+    name = models.CharField(max_length=100, verbose_name="Name")
+    phone = models.CharField(max_length=12)
 
     def __str__(self):
         return self.name
