@@ -32,19 +32,6 @@ def school_list(request):
 
 	schools = f.qs
 
-	new_sq = Subscribe.objects.filter(school__has_any_keys=['gender'])
-
-	for s in new_sq:
-		print('search:', s.search['gender'])
-
-	school_qs = Subscribe.objects.all()
-
-	for a in school_qs:
-		for x in a.school:
-			print('schools:', x['fields']['name'])
-
-	
-
 	data = serializers.serialize('json', schools, fields=('name',))
 	
 	request.session['schools'] = data
