@@ -225,10 +225,6 @@ def create_edit_school(request, id=None):
 						f_obj = SchoolSubject.objects.get(name=f)
 						school_form.school_subjects.add(f_obj)
 
-				
-
-				
-
 				messages.success(request, 'Success, School was created', extra_tags='alert alert-success')
 
 				if id:

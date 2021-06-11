@@ -50,7 +50,7 @@ class School(models.Model):
     #school location
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     district = models.ForeignKey(District, on_delete=models.CASCADE)
-    search_count = models.PositiveIntegerField(default=0)
+    search_count = models.PositiveIntegerField(blank=True, null=True)
 
     def __str__(self):
         return str(self.name)
